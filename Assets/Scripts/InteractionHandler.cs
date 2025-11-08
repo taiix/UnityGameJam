@@ -1,4 +1,3 @@
-
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +8,6 @@ public class InteractionHandler : MonoBehaviour
 
     public Vector3 interactionRaypoint = new Vector3(0.5f, 0.5f, 0f);
     public float interactionDistance = default;
-
     public LayerMask layerMask;
 
     public Interactable currentInteractable;
@@ -20,6 +18,10 @@ public class InteractionHandler : MonoBehaviour
     private PlayerInput playerInput;
 
     [SerializeField] public GameObject interactionUI;
+
+    // New grab support
+    private InputAction grabAction;
+    private PickupInteractable heldPickup;
 
     private void Awake()
     {
@@ -32,29 +34,42 @@ public class InteractionHandler : MonoBehaviour
             Instance = this;
         }
 
-        inputAsset = this.GetComponentInParent<PlayerInput>().actions;
+        playerInput = GetComponentInParent<PlayerInput>();
+        inputAsset = playerInput.actions;
         player = inputAsset.FindActionMap("Player");
-        playerInput = this.GetComponentInParent<PlayerInput>();
-
         mainCamera = Camera.main;
     }
-
 
     private void OnEnable()
     {
         player.FindAction("Interaction").started += Interact;
+
+        grabAction = player.FindAction("Grab");
+        if (grabAction != null)
+        {
+            grabAction.started += OnGrabStarted;
+            grabAction.canceled += OnGrabCanceled;
+        }
     }
 
-    //Unsubscirbe
     private void OnDisable()
     {
         player.FindAction("Interaction").started -= Interact;
+
+        if (grabAction != null)
+        {
+            grabAction.started -= OnGrabStarted;
+            grabAction.canceled -= OnGrabCanceled;
+        }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        HandleInteractionCheck();
+        // While holding something, skip target switching
+        if (heldPickup == null)
+        {
+            HandleInteractionCheck();
+        }
     }
 
     void HandleInteractionCheck()
@@ -68,38 +83,35 @@ public class InteractionHandler : MonoBehaviour
         var ray = mainCamera.ViewportPointToRay(interactionRaypoint);
         Debug.DrawRay(ray.origin, ray.direction * interactionDistance, Color.green);
 
-
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance, layerMask))
         {
             if (hit.collider.TryGetComponent(out Interactable hitInteractable) && hitInteractable != currentInteractable)
             {
-                // If the current interactable is different, handle focus change
-                if (currentInteractable != hitInteractable)
+                if (currentInteractable != null)
                 {
-                    // Lose focus on the previous interactable
-                    if (currentInteractable != null)
-                    {
-                        currentInteractable.OnLoseFocus();
-                        interactionUI.SetActive(false);
-                    }
+                    currentInteractable.OnLoseFocus();
+                    interactionUI.SetActive(false);
+                }
 
-                    // Focus on the new interactable
-                    currentInteractable = hitInteractable;
-                    currentInteractable.OnFocus();
+                currentInteractable = hitInteractable;
+                currentInteractable.OnFocus();
 
-
+                if (!string.IsNullOrEmpty(currentInteractable.interactionText))
+                {
                     interactionUI.GetComponentInChildren<TextMeshProUGUI>().text = currentInteractable.interactionText;
                     interactionUI.SetActive(true);
+                }
+                else
+                {
+                    interactionUI.SetActive(false);
                 }
             }
         }
         else if (currentInteractable != null)
         {
-            // No hit; lose focus on the current interactable
             currentInteractable.OnLoseFocus();
             currentInteractable = null;
             interactionUI.SetActive(false);
-
         }
     }
 
@@ -110,10 +122,42 @@ public class InteractionHandler : MonoBehaviour
 
     void HandleInteractionInput()
     {
+        if (heldPickup != null) return; // Ignore normal interact while holding
         if (currentInteractable != null)
         {
-            //anim?.SetTrigger("press");
             currentInteractable.OnInteract();
+        }
+    }
+
+    private void OnGrabStarted(InputAction.CallbackContext ctx)
+    {
+        if (heldPickup != null) return;
+
+        if (currentInteractable != null && currentInteractable is PickupInteractable pickup)
+        {
+            heldPickup = pickup;
+            heldPickup.BeginHold();
+            interactionUI.SetActive(false);
+        }
+    }
+
+    private void OnGrabCanceled(InputAction.CallbackContext ctx)
+    {
+        if (heldPickup != null)
+        {
+            heldPickup.EndHold();
+            heldPickup = null;
+
+            // Refresh UI if still looking at something interactable
+            if (currentInteractable != null)
+            {
+                currentInteractable.OnFocus();
+                if (!string.IsNullOrEmpty(currentInteractable.interactionText))
+                {
+                    interactionUI.GetComponentInChildren<TextMeshProUGUI>().text = currentInteractable.interactionText;
+                    interactionUI.SetActive(true);
+                }
+            }
         }
     }
 
@@ -129,5 +173,4 @@ public class InteractionHandler : MonoBehaviour
             interactionUI.SetActive(false);
         }
     }
-
 }

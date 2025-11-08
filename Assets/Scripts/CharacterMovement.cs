@@ -126,37 +126,6 @@ public class CharacterMovement : MonoBehaviour
         return false;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        // Draw the raycast
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * Mathf.Infinity);
-
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity))
-        {
-            // Draw a sphere at the hit point
-            Gizmos.DrawSphere(hit.point, 0.1f);
-
-            // Display the slope angle as text in the Scene view
-#if UNITY_EDITOR
-            UnityEditor.Handles.Label(hit.point, $"Angle: {Vector3.Angle(hit.normal, Vector3.up):F1}�");
-#endif
-
-            // Change the Gizmos color if the slope is too steep
-            if (Vector3.Angle(hit.normal, Vector3.up) > maxSlopeAngle)
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawRay(hit.point, hit.normal); // Draw the normal vector
-            }
-            else
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawRay(hit.point, hit.normal);
-            }
-        }
-    }
-
     private bool GroundCheck()
     {
         //Vector3 origin = transform.position + Vector3.up * 0.1f;

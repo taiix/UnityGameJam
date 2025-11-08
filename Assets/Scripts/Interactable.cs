@@ -7,6 +7,8 @@ public abstract class Interactable : MonoBehaviour
 
     public string interactionText = string.Empty;
 
+    public virtual bool CanBePickedUp => this is PickupInteractable;
+
     public virtual void Awake()
     {
         gameObject.layer = 6;
