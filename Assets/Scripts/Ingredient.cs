@@ -1,13 +1,13 @@
 using UnityEngine;
-
+public enum IngredientType
+{
+    MushroomFromThePast,
+    FreshFromThePresent,
+    PowderFromTheFuture
+}
 public class Ingredient : MonoBehaviour
 {
-    public enum IngredientType
-    {
-       MushroomFromThePast,
-       FreshFromThePresent,
-       PowderFromTheFuture
-    }
+  
 
     public IngredientType _ingredientType;
     public string ingredientName;
@@ -16,8 +16,15 @@ public class Ingredient : MonoBehaviour
     public float cookingTime;
     public bool isCooked;
 
-    void Update()
+    
+
+    public void CookIngredient(float time)
     {
-        
+        cookingTime += time;
+        if (cookingTime >= 5.0f) // Arbitrary cooking time threshold
+        {
+            isCooked = true;
+            Debug.Log($"{ingredientName} is cooked!");
+        }
     }
 }
