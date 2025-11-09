@@ -55,7 +55,7 @@ public class CookingPot : MonoBehaviour
         {
             if (currentIngredientIndex >= ingredientsInPot.Length)
             {
-                
+
                 // Start cooking process
                 Debug.Log("Cooking started...");
                 // Here you can implement a timer or coroutine to handle cooking time
@@ -75,7 +75,7 @@ public class CookingPot : MonoBehaviour
                         }
                     }
                     openDoor.GetComponent<Animator>().SetTrigger("openDoor");
-                    roomToEnable.SetActive(true);
+                    if (roomToEnable != null) roomToEnable.SetActive(true);
                 }
             }
         }

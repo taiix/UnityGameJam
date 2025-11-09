@@ -63,7 +63,7 @@ public class CharacterMovement : MonoBehaviour
             cameraTarget.localPosition = cameraTargetLocalOffset;
             cameraTarget.localRotation = Quaternion.identity;
         }
-
+        Time.timeScale = 1f;
         yaw = transform.eulerAngles.y;
         pitch = 0f;
     }
@@ -180,6 +180,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void DisableControls() => activateControls = false;
+
     public void EnableControls() => activateControls = true;
 
     // Animate pitch over time, then optionally disable controls and invoke onComplete.

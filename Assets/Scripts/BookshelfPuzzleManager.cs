@@ -5,7 +5,7 @@ public class BookshelfPuzzleManager : MonoBehaviour
 {
     [SerializeField] private Bookshelf bookshelf;
     [SerializeField] private BookshelfPuzzleSlot[] slots;
-
+    public GameObject enableRoom;
     public UnityEvent OnPuzzleSolved;
 
     public bool solved = false;
@@ -62,6 +62,7 @@ public class BookshelfPuzzleManager : MonoBehaviour
             {
                 solved = false;
                 bookshelf?.MoveBackToOriginal(0f);
+                enableRoom.SetActive(true);
             }
         }
     }
