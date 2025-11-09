@@ -2735,6 +2735,63 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &2151884394767441944
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 601228394418171432, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_Name
+      value: InteractableWoodCupboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.644212
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.384
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.963
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880867837373235297, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4e61607daa418d42901d20832c01c7f, type: 3}
 --- !u!1 &2485625131256738083
 GameObject:
   m_ObjectHideFlags: 0
@@ -3582,3 +3639,4 @@ SceneRoots:
   - {fileID: 543450653252892581}
   - {fileID: 543450653330578147}
   - {fileID: 6997005908351680920}
+  - {fileID: 2151884394767441944}
