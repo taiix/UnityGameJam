@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BookOpenedTextManager : MonoBehaviour
 {
+   
     [SerializeField] private TextMeshProUGUI leftPageText;
     [SerializeField] private TextMeshProUGUI rightPageText;
 

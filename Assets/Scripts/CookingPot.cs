@@ -37,6 +37,7 @@ public class CookingPot : MonoBehaviour
         {
             if (i._ingredientType == expectedType)
             {
+                SoundManager.instance?.PlaySound("IngredientAdded");
                 Destroy(other.gameObject);
                 expectedType
                     = ingredientsInPot
