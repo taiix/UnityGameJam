@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e04263e4814bcef4181ca83a4d6d8ecb
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Resources/Shaders/Refraction.shader
+  uploadId: 248818

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 40711bd7abdb53044b416f11b555adff
+labels:
+- Architecture
+timeCreated: 1509488446
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Architecture/IntWall02b.prefab
+  uploadId: 248818

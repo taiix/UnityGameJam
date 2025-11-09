@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8a5fe1f0440b86e42b542a0a45716e5b
+timeCreated: 1505336833
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Items/Lights/Materials/Candle01Light.mat
+  uploadId: 248818
