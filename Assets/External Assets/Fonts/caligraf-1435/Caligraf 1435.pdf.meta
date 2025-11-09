@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/External Assets/Fonts/caligraf-1435/Caligraf 1435.pdf.meta
 guid: 69bccc66e075474488a2b3a9013639fd
 DefaultImporter:
+========
+guid: c2f9ae66372290c498ddaad587803062
+PrefabImporter:
+>>>>>>>> origin/sh-eba:Assets/Prefabs/Books puzzle/CycleBook.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

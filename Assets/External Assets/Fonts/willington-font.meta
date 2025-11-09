@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/External Assets/Fonts/willington-font.meta
 guid: 9261268cbdd6e7e4fb66ff181b051255
 folderAsset: yes
 DefaultImporter:
+========
+guid: 83c74048af0056a4fbb68494a8a694e2
+PrefabImporter:
+>>>>>>>> origin/sh-eba:Assets/Prefabs/Books puzzle/PickableMoonBook.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/External Assets/Fonts/caligraf-1435.meta
 guid: 52584b105e7e6284eb094bc6e2c5a565
 folderAsset: yes
 DefaultImporter:
+========
+guid: 14c778a77174f364b84b0c3d1a852d08
+PrefabImporter:
+>>>>>>>> origin/sh-eba:Assets/Prefabs/Books puzzle/PickableHourglassBook.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

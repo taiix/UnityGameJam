@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Books puzzle.meta
 guid: 6c5b03f1385b8b046ad903abf10f131d
 folderAsset: yes
 DefaultImporter:
+========
+guid: 2302aaee4e0395942a6f3fd53109d90d
+PrefabImporter:
+>>>>>>>> origin/sh-eba:Assets/Prefabs/Books puzzle/PickableInfinityBook.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
