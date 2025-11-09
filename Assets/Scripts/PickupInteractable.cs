@@ -61,29 +61,41 @@ public class PickupInteractable : Interactable
 
     public override void OnInteract()
     {
-        // Not used; pickup handled by Grab action.
+        // Pick-up handled by InteractionHandler's Grab action.
     }
 
     public void BeginHold()
     {
         if (isHeld) return;
-        boxCollider.excludeLayers  = LayerMask.GetMask("Player");
+
         isHeld = true;
         interactionText = string.Empty;
+
+        rb.isKinematic = false;
         rb.useGravity = false;
         rb.freezeRotation = false;
         rb.linearDamping = holdDrag;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+        if (boxCollider != null)
+        {
+            boxCollider.excludeLayers = LayerMask.GetMask("Player");
+        }
     }
 
     public void EndHold()
     {
         if (!isHeld) return;
-        boxCollider.excludeLayers = LayerMask.GetMask("Nothing");
+
         isHeld = false;
+
         rb.useGravity = true;
         rb.linearDamping = originalDrag;
         rb.constraints = originalConstraints;
+
+        if (boxCollider != null)
+        {
+            boxCollider.excludeLayers = LayerMask.GetMask("Nothing");
+        }
     }
 
     private void Update()
@@ -98,16 +110,13 @@ public class PickupInteractable : Interactable
     {
         if (Mouse.current == null) return;
 
-        // Scroll returns a Vector2; y is vertical scroll (positive usually scroll up).
-        float raw = Mouse.current.scroll.ReadValue().y; // Typical values ±120 per notch on Windows.
+        float raw = Mouse.current.scroll.ReadValue().y;
         if (Mathf.Abs(raw) < Mathf.Epsilon) return;
 
         float directionFactor = invertScroll ? -1f : 1f;
-        // Normalize by typical notch value (120) so one notch = scrollDistanceStep.
         holdDistance += directionFactor * (raw / 120f) * scrollDistanceStep;
         holdDistance = Mathf.Clamp(holdDistance, minHoldDistance, maxHoldDistance);
 
-        // Ensure drop threshold covers max distance so object does not auto-drop when extended.
         if (maxDistanceBeforeDrop < maxHoldDistance)
         {
             maxDistanceBeforeDrop = maxHoldDistance;
@@ -125,7 +134,6 @@ public class PickupInteractable : Interactable
         {
             transform.Rotate(Vector3.up * horizontalRotateSpeed * dt, Space.World);
         }
-
         if (keyboard.eKey.isPressed)
         {
             transform.Rotate(Vector3.right * verticalRotateSpeed * dt, Space.Self);

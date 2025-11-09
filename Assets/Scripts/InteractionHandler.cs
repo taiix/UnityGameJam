@@ -19,20 +19,13 @@ public class InteractionHandler : MonoBehaviour
 
     [SerializeField] public GameObject interactionUI;
 
-    // New grab support
     private InputAction grabAction;
     private PickupInteractable heldPickup;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        if (Instance != null && Instance != this) { Destroy(gameObject); }
+        else { Instance = this; }
 
         playerInput = GetComponentInParent<PlayerInput>();
         inputAsset = playerInput.actions;
@@ -65,7 +58,6 @@ public class InteractionHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        // While holding something, skip target switching
         if (heldPickup == null)
         {
             HandleInteractionCheck();
@@ -74,11 +66,7 @@ public class InteractionHandler : MonoBehaviour
 
     void HandleInteractionCheck()
     {
-        if (mainCamera == null)
-        {
-            Debug.LogError("Main camera is not set!");
-            return;
-        }
+        if (mainCamera == null) return;
 
         var ray = mainCamera.ViewportPointToRay(interactionRaypoint);
         Debug.DrawRay(ray.origin, ray.direction * interactionDistance, Color.green);
@@ -122,19 +110,17 @@ public class InteractionHandler : MonoBehaviour
 
     void HandleInteractionInput()
     {
-        if (heldPickup != null) return; // Ignore normal interact while holding
-        if (currentInteractable != null)
-        {
-            currentInteractable.OnInteract();
-        }
+        if (heldPickup != null) return;
+        currentInteractable?.OnInteract();
     }
 
     private void OnGrabStarted(InputAction.CallbackContext ctx)
     {
         if (heldPickup != null) return;
 
-        if (currentInteractable != null && currentInteractable is PickupInteractable pickup)
+        if (currentInteractable is PickupInteractable pickup)
         {
+
             heldPickup = pickup;
             heldPickup.BeginHold();
             interactionUI.SetActive(false);
@@ -148,7 +134,6 @@ public class InteractionHandler : MonoBehaviour
             heldPickup.EndHold();
             heldPickup = null;
 
-            // Refresh UI if still looking at something interactable
             if (currentInteractable != null)
             {
                 currentInteractable.OnFocus();
@@ -168,9 +153,6 @@ public class InteractionHandler : MonoBehaviour
 
     public void HideInteractionUI()
     {
-        if (interactionUI != null)
-        {
-            interactionUI.SetActive(false);
-        }
+        interactionUI?.SetActive(false);
     }
 }

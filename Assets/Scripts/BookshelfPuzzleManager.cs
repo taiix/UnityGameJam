@@ -53,7 +53,7 @@ public class BookshelfPuzzleManager : MonoBehaviour
             {
                 solved = true;
                 OnPuzzleSolved?.Invoke();
-                bookshelf?.MoveBookShelf(true, 2f, 1f);
+                bookshelf?.MoveBookShelf(false, 2f, 1f);
             }
         }
         else

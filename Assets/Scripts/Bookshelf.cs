@@ -20,28 +20,19 @@ public class Bookshelf : MonoBehaviour
 
     public void MoveBookShelf(bool moveLeft, float moveDistance, float delayTime)
     {
-        foreach (Transform child in transform)
-        {
-            if (child.TryGetComponent<Rigidbody>(out var rb) && child.GetComponent<BookPickupInteractable>() != null)
-            {
-                rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            }
-        }
-
         float direction = moveLeft ? -1f : 1f;
-        targetPosition = originalPosition + new Vector3(direction * moveDistance, 0f, 0f);
+        targetPosition = originalPosition + new Vector3(0, 0f, direction * moveDistance);
 
         moveDirection = moveLeft;
         isMoving = true;
         hasMoved = false;
     }
 
-    // New: move shelf back to its original position
+
     public void MoveBackToOriginal(float delayTime)
     {
         targetPosition = originalPosition;
-        // Decide direction based on current position relative to original
-        moveDirection = transform.position.x > originalPosition.x; // if right of original, move left
+        moveDirection = transform.position.z > originalPosition.z; 
         isMoving = true;
         hasMoved = false;
     }
@@ -60,12 +51,12 @@ public class Bookshelf : MonoBehaviour
             }
 
             float direction = moveDirection ? -1f : 1f;
-            Vector3 movement = new Vector3(direction * moveSpeed * Time.deltaTime, 0f, 0f);
+            Vector3 movement = new Vector3(0, 0f, direction * moveSpeed * Time.deltaTime);
             transform.position += movement;
 
             bool reached =
-                (moveDirection && transform.position.x <= targetPosition.x) ||
-                (!moveDirection && transform.position.x >= targetPosition.x);
+                (moveDirection && transform.position.z <= targetPosition.z) ||
+                (!moveDirection && transform.position.z >= targetPosition.z);
 
             if (reached)
             {
