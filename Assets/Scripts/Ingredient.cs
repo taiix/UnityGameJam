@@ -3,7 +3,11 @@ public enum IngredientType
 {
     MushroomFromThePast,
     FreshFromThePresent,
-    PowderFromTheFuture
+    PowderFromTheFuture,
+
+    RustySword,
+    NormalSword,
+    Excalibur
 }
 public class Ingredient : MonoBehaviour
 {
