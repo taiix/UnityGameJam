@@ -8,6 +8,7 @@ public class WoodCupboardInteractable : Interactable
     [Header("Animation")]
     [SerializeField] private float rotateDuration = 0.6f;
     [SerializeField] private AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField] private BoxCollider frontCollider;
 
     // Target local rotations
     private Quaternion leftClosedRot;
@@ -23,7 +24,15 @@ public class WoodCupboardInteractable : Interactable
     {
         if (!animating)
         {
-            interactionText = isOpen ? "Press F to close" : "Press F to open";
+            if (isOpen)
+            {
+                interactionText = string.Empty;
+            }
+            else
+            {
+
+                interactionText = "Press F to open";
+            }
         }
     }
 
@@ -31,6 +40,14 @@ public class WoodCupboardInteractable : Interactable
     {
         // Toggle desired state
         isOpen = !isOpen;
+        if (isOpen)
+        {
+            frontCollider.enabled = false;
+        }
+        else
+        {
+                       frontCollider.enabled = true;
+        }
 
         // Restart animation if already running
         if (currentAnimation != null)
@@ -55,8 +72,8 @@ public class WoodCupboardInteractable : Interactable
         rightClosedRot = rightDoor.localRotation;
 
         // Original open values from your instant version
-        leftOpenRot = Quaternion.Euler(-90, 0, 135);
-        rightOpenRot = Quaternion.Euler(-90, 0, -135);
+        leftOpenRot = Quaternion.Euler(-90, 0, 100);
+        rightOpenRot = Quaternion.Euler(-90, 0, -100);
     }
 
     private System.Collections.IEnumerator AnimateDoors(bool opening)

@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 public class PickupInteractable : Interactable
 {
     [Header("Pickup Settings")]
-    [SerializeField] private float holdDistance = 2.0f;
+    [SerializeField] private float holdDistance = 1.0f;
     [SerializeField] private float moveSpeed = 12f;
     [SerializeField] private float maxDistanceBeforeDrop = 5f;
     [SerializeField] private float holdDrag = 10f;
 
     [Header("Scroll Distance Settings")]
-    [SerializeField] private float minHoldDistance = 0.5f;
+    [SerializeField] private float minHoldDistance = 1.0f;
     [SerializeField] private float maxHoldDistance = 4.0f;
     [Tooltip("Distance change per one scroll notch (120 units).")]
-    [SerializeField] private float scrollDistanceStep = 0.25f;
+    [SerializeField] private float scrollDistanceStep = 10f;
     [Tooltip("Invert scroll direction.")]
     [SerializeField] private bool invertScroll = false;
 

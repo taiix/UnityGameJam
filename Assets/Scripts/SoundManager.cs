@@ -100,9 +100,11 @@ public class SoundManager : MonoBehaviour
     public void PlaySoundClip(AudioClip audioClip, Transform spawnPosition, float volume)
     {
         AudioSource audioSource = Instantiate(soundObject, spawnPosition.position, Quaternion.identity, transform);
+
         // AudioSource audioSource = newSoundObj.GetComponent<AudioSource>();
         if (audioSource != null)
         {
+            if (audioSource.isPlaying) return;
             audioSource.clip = audioClip;
             audioSource.volume = volume;
             audioSource.Play();

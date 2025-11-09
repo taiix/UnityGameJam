@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour
     public float sprintSpeed = 8f;
     public float normalSpeed = 4f;
 
-    [Header("Look")]
+    [Header("Look (manual when using Cinemachine Option A)")]
     public float sensitivity = 1f;
     [SerializeField] private float minPitch = -90f;
     [SerializeField] private float maxPitch = 90f;
@@ -20,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private int jumpForce = 5;
 
     [Header("Cinemachine Target")]
+    [Tooltip("Child transform used as Tracking Target for CinemachineCamera (NOT the MainCamera).")]
     [SerializeField] private Transform cameraTarget;
     [SerializeField] private Vector3 cameraTargetLocalOffset = new Vector3(0f, 1.7f, 0f);
 
@@ -46,7 +47,7 @@ public class CharacterMovement : MonoBehaviour
         player = playerInput.currentActionMap;
     }
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -60,36 +61,56 @@ public class CharacterMovement : MonoBehaviour
             cameraTarget = new GameObject("CameraTarget").transform;
             cameraTarget.SetParent(transform, false);
             cameraTarget.localPosition = cameraTargetLocalOffset;
+            cameraTarget.localRotation = Quaternion.identity;
         }
 
         yaw = transform.eulerAngles.y;
         pitch = 0f;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         jumpAction = player.FindAction("Jump");
-        if (jumpAction != null) { jumpAction.performed += Jump; jumpAction.Enable(); }
+        if (jumpAction != null)
+        {
+            jumpAction.performed += Jump;
+            jumpAction.Enable();
+        }
 
         sprintAction = player.FindAction("Sprint");
-        if (sprintAction != null) { sprintAction.performed += StartSprinting; sprintAction.canceled += StopSprinting; sprintAction.Enable(); }
+        if (sprintAction != null)
+        {
+            sprintAction.performed += StartSprinting;
+            sprintAction.canceled += StopSprinting;
+            sprintAction.Enable();
+        }
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        if (jumpAction != null) { jumpAction.performed -= Jump; jumpAction.Disable(); }
-        if (sprintAction != null) { sprintAction.performed -= StartSprinting; sprintAction.canceled -= StopSprinting; sprintAction.Disable(); }
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= Jump;
+            jumpAction.Disable();
+        }
+        if (sprintAction != null)
+        {
+            sprintAction.performed -= StartSprinting;
+            sprintAction.canceled -= StopSprinting;
+            sprintAction.Disable();
+        }
     }
 
-    // Read & accumulate look every rendered frame (before Brain runs)
-    void Update()
+    private void FixedUpdate()
     {
         if (!activateControls) return;
         if (IsOnValidSlope())
+        {
             MoveCharacter();
+        }
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (!activateControls) return;
 
@@ -99,38 +120,42 @@ public class CharacterMovement : MonoBehaviour
 
         if (cameraTarget != null)
         {
-            cameraTarget.localPosition = cameraTargetLocalOffset; // keep stable offset
+            cameraTarget.localPosition = cameraTargetLocalOffset;
             cameraTarget.localRotation = Quaternion.Euler(pitch, 0f, 0f);
         }
     }
 
-    bool IsOnValidSlope()
+    private bool IsOnValidSlope()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out var hit, 2f))
-            return Vector3.Angle(hit.normal, Vector3.up) < maxSlopeAngle;
+        {
+            float angle = Vector3.Angle(hit.normal, Vector3.up);
+            return angle < maxSlopeAngle;
+        }
         return true;
     }
 
     public void OnMove(InputAction.CallbackContext ctx) => move = ctx.ReadValue<Vector2>();
     public void OnLook(InputAction.CallbackContext ctx) => look = ctx.ReadValue<Vector2>();
 
-    void MoveCharacter()
+    private void MoveCharacter()
     {
         Vector3 current = rb.linearVelocity;
         Quaternion yawRot = Quaternion.Euler(0f, yaw, 0f);
         Vector3 forward = yawRot * Vector3.forward;
         Vector3 right = yawRot * Vector3.right;
         Vector3 desired = (right * move.x + forward * move.y) * speed;
+
         Vector3 change = desired - current;
         change.y = 0f;
         Vector3.ClampMagnitude(change, maxForce);
         rb.AddForce(change, ForceMode.VelocityChange);
     }
 
-    void StartSprinting(InputAction.CallbackContext _) => speed = sprintSpeed;
-    void StopSprinting(InputAction.CallbackContext _) => speed = normalSpeed;
+    private void StartSprinting(InputAction.CallbackContext _) => speed = sprintSpeed;
+    private void StopSprinting(InputAction.CallbackContext _) => speed = normalSpeed;
 
-    void Jump(InputAction.CallbackContext _)
+    private void Jump(InputAction.CallbackContext _)
     {
         if (!canJump) return;
         if (GroundCheck())
@@ -140,14 +165,14 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    bool GroundCheck()
+    private bool GroundCheck()
     {
         float radius = GetComponent<CapsuleCollider>().radius * 0.5f;
         float distance = GetComponent<CapsuleCollider>().bounds.extents.y + groundCheckDistance;
         return Physics.SphereCast(rb.position, radius, Vector3.down, out _, distance);
     }
 
-    IEnumerator JumpCooldown()
+    private IEnumerator JumpCooldown()
     {
         canJump = false;
         yield return new WaitForSeconds(0.5f);

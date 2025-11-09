@@ -36,5 +36,6 @@ public class Knight : MonoBehaviour
         }
 
         HasSword = true;
+        Destroy(pickup);
     }
 }
