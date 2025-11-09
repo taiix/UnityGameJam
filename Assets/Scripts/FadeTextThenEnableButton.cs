@@ -1,0 +1,90 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class FadeTextThenEnableButton : MonoBehaviour
+{
+    [Header("Targets")]
+    [SerializeField] private Graphic textGraphic;     // works with TextMeshProUGUI or UI Text/Image
+    [SerializeField] private Button targetButton;
+
+    [Header("Timing")]
+    [SerializeField] private float fadeDuration = 1.5f;      // seconds for alpha 0->1
+    [SerializeField] private float buttonEnableDelay = 3f;   // seconds after start to enable button
+
+    [Header("Behavior")]
+    [SerializeField] private AnimationCurve ease = null;     // easing for fade (0..1)
+    [SerializeField] private bool playOnEnable = false;      // auto-run on enable
+    [SerializeField] private bool disableButtonAtStart = true;
+    [SerializeField] private bool setButtonActive = true;    // also SetActive(true) when enabling
+    [SerializeField] private bool setButtonInteractable = true;
+    [SerializeField] private bool unlockCursorOnStart = true; // NEW: show/unlock cursor when text appears
+
+    private Coroutine routine;
+
+    private void Awake()
+    {
+        if (ease == null) ease = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    }
+
+    private void OnEnable()
+    {
+        if (playOnEnable) Play();
+    }
+
+    public void Play()
+    {
+        if (routine != null) StopCoroutine(routine);
+        routine = StartCoroutine(Run());
+    }
+
+    private IEnumerator Run()
+    {
+        if (textGraphic == null) yield break;
+
+        // Ensure cursor is usable when the text appears
+        if (unlockCursorOnStart)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        // Prepare text
+        if (!textGraphic.gameObject.activeSelf)
+            textGraphic.gameObject.SetActive(true);
+
+        Color baseCol = textGraphic.color;
+        textGraphic.color = new Color(baseCol.r, baseCol.g, baseCol.b, 0f);
+
+        // Prepare button
+        if (targetButton != null && disableButtonAtStart)
+        {
+            if (setButtonActive) targetButton.gameObject.SetActive(false);
+            if (setButtonInteractable) targetButton.interactable = false;
+        }
+
+        // Fade alpha 0 -> 1
+        float t = 0f;
+        float dur = Mathf.Max(0.0001f, fadeDuration);
+        while (t < 1f)
+        {
+            t += Time.deltaTime / dur;
+            float k = ease.Evaluate(Mathf.Clamp01(t));
+            textGraphic.color = new Color(baseCol.r, baseCol.g, baseCol.b, k);
+            yield return null;
+        }
+        textGraphic.color = new Color(baseCol.r, baseCol.g, baseCol.b, 1f);
+
+        // Enable button after delay (relative to start)
+        float remaining = Mathf.Max(0f, buttonEnableDelay - fadeDuration);
+        if (remaining > 0f) yield return new WaitForSeconds(remaining);
+
+        if (targetButton != null)
+        {
+            if (setButtonActive) targetButton.gameObject.SetActive(true);
+            if (setButtonInteractable) targetButton.interactable = true;
+        }
+
+        routine = null;
+    }
+}

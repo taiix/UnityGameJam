@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - SkyboxCamera
+  - Wood
+  - Carpet
+  - Stone
   layers:
   - Default
   - TransparentFX
