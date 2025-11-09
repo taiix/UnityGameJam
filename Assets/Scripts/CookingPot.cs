@@ -12,6 +12,7 @@ public class CookingPot : MonoBehaviour
 
     public GameObject openDoor;
     private bool isDone = false;
+    public GameObject roomToEnable;
 
     private void Start()
     {
@@ -74,6 +75,7 @@ public class CookingPot : MonoBehaviour
                         }
                     }
                     openDoor.GetComponent<Animator>().SetTrigger("openDoor");
+                    roomToEnable.SetActive(true);
                 }
             }
         }

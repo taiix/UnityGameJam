@@ -39,6 +39,8 @@ public class CharacterMovement : MonoBehaviour
     private InputAction jumpAction;
     private InputAction sprintAction;
 
+    private Coroutine pitchAnimRoutine;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -102,10 +104,6 @@ public class CharacterMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (!activateControls) return;
-
-        // Rotate Rigidbody via physics (yaw only)
-        rb.MoveRotation(Quaternion.Euler(0f, yaw, 0f));
-
         if (IsOnValidSlope())
         {
             MoveCharacter();
@@ -116,7 +114,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (!activateControls) return;
 
-        // Manual look (Option A). Disable this block if using Cinemachine POV (Option B).
+        rb.MoveRotation(Quaternion.Euler(0f, yaw, 0f));
         yaw += look.x * sensitivity;
         pitch = Mathf.Clamp(pitch - look.y * sensitivity, minPitch, maxPitch);
 
@@ -143,18 +141,14 @@ public class CharacterMovement : MonoBehaviour
     private void MoveCharacter()
     {
         Vector3 current = rb.linearVelocity;
-
-        // Build basis from the same yaw we apply via MoveRotation
         Quaternion yawRot = Quaternion.Euler(0f, yaw, 0f);
         Vector3 forward = yawRot * Vector3.forward;
         Vector3 right = yawRot * Vector3.right;
-
         Vector3 desired = (right * move.x + forward * move.y) * speed;
 
         Vector3 change = desired - current;
         change.y = 0f;
         Vector3.ClampMagnitude(change, maxForce);
-
         rb.AddForce(change, ForceMode.VelocityChange);
     }
 
@@ -188,7 +182,44 @@ public class CharacterMovement : MonoBehaviour
     public void DisableControls() => activateControls = false;
     public void EnableControls() => activateControls = true;
 
-    // OPTION B helper: call this if using Cinemachine POV to sync player yaw with camera yaw.
+    // Animate pitch over time, then optionally disable controls and invoke onComplete.
+    public void AnimatePitch(float targetPitch, float duration, AnimationCurve curve, bool disableControlsAfter = true, System.Action onComplete = null)
+    {
+        if (pitchAnimRoutine != null) StopCoroutine(pitchAnimRoutine);
+        pitchAnimRoutine = StartCoroutine(AnimatePitchRoutine(targetPitch, duration, curve, disableControlsAfter, onComplete));
+    }
+
+    private IEnumerator AnimatePitchRoutine(float targetPitch, float duration, AnimationCurve curve, bool disableControlsAfter, System.Action onComplete)
+    {
+        float start = pitch;
+        float end = Mathf.Clamp(targetPitch, minPitch, maxPitch);
+        float elapsed = 0f;
+        duration = Mathf.Max(0.0001f, duration);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            float k = curve != null ? curve.Evaluate(t) : t;
+            pitch = Mathf.Lerp(start, end, k);
+
+            if (cameraTarget != null)
+                cameraTarget.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+
+            yield return null;
+        }
+
+        pitch = end;
+        if (cameraTarget != null)
+            cameraTarget.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+
+        if (disableControlsAfter)
+            DisableControls();
+
+        onComplete?.Invoke();
+        pitchAnimRoutine = null;
+    }
+
     public void SyncYawFromCamera(Transform cinemachineCameraTransform)
     {
         Vector3 e = cinemachineCameraTransform.rotation.eulerAngles;
