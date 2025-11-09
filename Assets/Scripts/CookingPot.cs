@@ -75,6 +75,7 @@ public class CookingPot : MonoBehaviour
                             main.startColor = Color.red;
                         }
                     }
+                    SoundManager.instance?.PlaySound("OpenWoodDoor");
                     openDoor.GetComponent<Animator>().SetTrigger("openDoor");
                     if (roomToEnable != null) roomToEnable.SetActive(true);
                 }

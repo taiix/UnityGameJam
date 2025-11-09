@@ -60,9 +60,9 @@ public class BookshelfPuzzleManager : MonoBehaviour
         {
             if (solved)
             {
+                enableRoom.SetActive(true);
                 solved = false;
                 bookshelf?.MoveBackToOriginal(0f);
-                enableRoom.SetActive(true);
             }
         }
     }

@@ -15,6 +15,11 @@ public class Knight : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (HasSword) return;
+        var a = other.GetComponent<Ingredient>();
+        if (a == null) return;
+
+        if (!a.isPickedUp) a.PickUp();
+        else return;
 
         var pickup = other.GetComponent<PickupInteractable>();
         if (pickup == null) return;
@@ -32,7 +37,7 @@ public class Knight : MonoBehaviour
         {
             rb.isKinematic = true;
             rb.useGravity = false;
-            
+
         }
 
         HasSword = true;

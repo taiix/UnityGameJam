@@ -13,4 +13,11 @@ public class Ingredient : MonoBehaviour
 {
     public IngredientType _ingredientType;
     public string ingredientName;
+
+    public bool isPickedUp = false;
+
+    public void PickUp()
+    {
+        isPickedUp = true;
+    }
 }
