@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5f55f4e7962ea9d42b41c8c4a2b8638a
+timeCreated: 1502549948
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Surfaces/Materials/TileFloor01.mat
+  uploadId: 248818

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 69f11ff4700c31549bdde68d6490b2c0
+labels:
+- Architecture
+timeCreated: 1509489784
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Architecture/Floor.prefab
+  uploadId: 248818

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1835ba1ccf9fa0b4fae552ca9eb81484
+labels:
+- Furniture
+timeCreated: 1503764264
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Furniture/Alembic02.prefab
+  uploadId: 248818

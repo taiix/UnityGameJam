@@ -136,7 +136,7 @@ Material:
     - _node_7647: {r: 0.061764684, g: 0.30882353, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &2304697900163594152
+--- !u!114 &8823762583901112138
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

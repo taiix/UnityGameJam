@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 87e44d754c3f1544185e70425c4acfc9
+labels:
+- Architecture
+timeCreated: 1509488914
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Architecture/VerticalPillarBig.prefab
+  uploadId: 248818

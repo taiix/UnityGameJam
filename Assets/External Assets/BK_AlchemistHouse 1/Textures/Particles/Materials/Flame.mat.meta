@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 25d7abf39c632e84bb2c36c4440a23e7
+timeCreated: 1504000608
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Particles/Materials/Flame.mat
+  uploadId: 248818

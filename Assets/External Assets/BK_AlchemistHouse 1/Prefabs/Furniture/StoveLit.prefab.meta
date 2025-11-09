@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1c11e22cffd2a554baca9738f4d8b4eb
+timeCreated: 1519526884
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Furniture/StoveLit.prefab
+  uploadId: 248818

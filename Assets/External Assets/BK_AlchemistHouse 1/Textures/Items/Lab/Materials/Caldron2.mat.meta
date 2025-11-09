@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2a5b7dae41436644f963e8c46057e48d
+timeCreated: 1518415566
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Items/Lab/Materials/Caldron2.mat
+  uploadId: 248818

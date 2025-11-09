@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a417ae60ba05888478bb11512cd7d11f
+timeCreated: 1502330630
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Furniture/Materials/Globe.mat
+  uploadId: 248818

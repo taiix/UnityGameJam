@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 13d67f77f4a17fc4d9d52d7736082bc9
+timeCreated: 1502144486
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Particles/Materials/Bubbles.mat
+  uploadId: 248818

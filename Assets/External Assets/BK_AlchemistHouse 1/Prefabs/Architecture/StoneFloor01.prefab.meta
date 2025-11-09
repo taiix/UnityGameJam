@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 44f5830904bc58441bf3c43f5b5e6e1a
+labels:
+- Architecture
+timeCreated: 1509488433
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Architecture/StoneFloor01.prefab
+  uploadId: 248818
