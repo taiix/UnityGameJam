@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/External Assets/Fonts.meta
 guid: 727568bb816c0764e88feb1b8f4de873
+========
+guid: 6c5b03f1385b8b046ad903abf10f131d
+>>>>>>>> origin/sh-eba:Assets/Prefabs/Books puzzle.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
