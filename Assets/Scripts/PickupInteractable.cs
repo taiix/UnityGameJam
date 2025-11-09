@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -47,7 +48,14 @@ public class PickupInteractable : Interactable
     {
         if (!isHeld)
         {
-            interactionText = "Hold LMB to pick up";
+            if (this.enabled)
+            {
+                if (GetComponent<Ingredient>() != null)
+                    interactionText = $"Hold LMB to pick up " +
+                        $"<color=yellow>{GetComponent<Ingredient>().ingredientName}</color>";
+                else interactionText = "Hold LMB to pick up";
+
+            }
         }
     }
 
@@ -67,7 +75,7 @@ public class PickupInteractable : Interactable
     public void BeginHold()
     {
         if (isHeld) return;
-        boxCollider.excludeLayers  = LayerMask.GetMask("Player");
+        boxCollider.excludeLayers = LayerMask.GetMask("Player");
         isHeld = true;
         interactionText = string.Empty;
         rb.useGravity = false;

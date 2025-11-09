@@ -16,6 +16,7 @@ public class CookingTripod : MonoBehaviour
                 pot.gameObject.transform.SetParent(this.gameObject.transform);
                 pot.gameObject.transform.localPosition = Vector3.zero + new Vector3(0, 0, 60);
                 isOccupied = true;
+                
                 pot.GetComponent<PickupInteractable>().enabled = false;
             }
         }
