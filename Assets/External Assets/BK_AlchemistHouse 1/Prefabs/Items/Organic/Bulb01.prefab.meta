@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d8810fef22f3704eb7084a45a123cfc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Items/Organic/Bulb01.prefab
+  uploadId: 248818

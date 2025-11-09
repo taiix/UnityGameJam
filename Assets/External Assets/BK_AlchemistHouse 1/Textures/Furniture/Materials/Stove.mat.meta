@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 56ada9418897ab24b9f55eced3828074
+timeCreated: 1518403768
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Furniture/Materials/Stove.mat
+  uploadId: 248818

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 77d220d27bb7f694f9d4965925bea203
+timeCreated: 1517953690
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Furniture/Materials/Table03.mat
+  uploadId: 248818

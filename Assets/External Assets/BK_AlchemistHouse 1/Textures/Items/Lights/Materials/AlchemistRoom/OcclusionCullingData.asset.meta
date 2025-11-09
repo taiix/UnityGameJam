@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ff670e40425c4254caad9e9a89d6d208
+timeCreated: 1504200684
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 36300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Items/Lights/Materials/AlchemistRoom/OcclusionCullingData.asset
+  uploadId: 248818

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2d5cd0ccd1382d449aa859709db297c8
+timeCreated: 1508638254
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Textures/Items/Organic/Materials/Baby03.mat
+  uploadId: 248818

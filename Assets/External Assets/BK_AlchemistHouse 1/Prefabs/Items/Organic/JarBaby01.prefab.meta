@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a78b00f7175eada4198da9c08714b56d
+timeCreated: 1508467525
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Items/Organic/JarBaby01.prefab
+  uploadId: 248818

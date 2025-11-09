@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cf2f9576d3fa2534a8ec82b98dfe7393
+timeCreated: 1518415811
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 112442
+  packageName: Alchemist House
+  packageVersion: 1.0
+  assetPath: Assets/BK_AlchemistHouse/Prefabs/Items/Lab/CaldronTripod02.prefab
+  uploadId: 248818
