@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class OpenBookInteractable : Interactable
 {
+    [TextArea(5,10)]
     public string leftPageContent;
+
+    [TextArea(5, 10)]
     public string rightPageContent;
+
     public override void OnFocus()
     {
         interactionText = "Press F to Open Book";
