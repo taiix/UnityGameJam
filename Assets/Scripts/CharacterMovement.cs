@@ -1,225 +1,197 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class CharacterMovement : MonoBehaviour
 {
-    public float sensitivity;
-    public float maxForce;
+    [Header("Movement")]
+    public float maxForce = 10f;
+    public float sprintSpeed = 8f;
+    public float normalSpeed = 4f;
+
+    [Header("Look (manual when using Cinemachine Option A)")]
+    public float sensitivity = 1f;
+    [SerializeField] private float minPitch = -90f;
+    [SerializeField] private float maxPitch = 90f;
+
+    [Header("Grounding")]
+    [SerializeField] private float groundCheckDistance = 0.1f;
+    [SerializeField] private float maxSlopeAngle = 45f;
+    [SerializeField] private int jumpForce = 5;
+
+    [Header("Cinemachine Target")]
+    [Tooltip("Child transform used as Tracking Target for CinemachineCamera (NOT the MainCamera).")]
+    [SerializeField] private Transform cameraTarget;
+    [SerializeField] private Vector3 cameraTargetLocalOffset = new Vector3(0f, 1.7f, 0f);
 
     private Rigidbody rb;
-    private float speed;
-
-    public float sprintSpeed;
-    public float normalSpeed;
+    private PlayerInput playerInput;
 
     private Vector2 move;
     private Vector2 look;
-    private float lookRotation;
+    private float yaw;
+    private float pitch;
+    private float speed;
+    private bool canJump = true;
+    private bool activateControls = true;
 
-    private PlayerInput playerInput;
     private InputActionMap player;
     private InputAction jumpAction;
     private InputAction sprintAction;
-    [SerializeField] private float groundCheckDistance = 0.1f;
-
-    [SerializeField] private float maxSlopeAngle = 45f;
-
-    [SerializeField] int jumpForce = 2;
-    public bool isGrounded { get; private set; }
-    private bool isSprinting;
-
-
-    private bool activateControls = true;
-    private bool canJump = true;
-
-    //public static event Action OnDisableControls;
-    //public static event Action OnEnableControls;
-
-    bool isMoving;
-    public InputActionMap PlayerAction
-    {
-        get
-        {
-            // Ensure PlayerAction is initialized before accessing it.
-            if (player == null && playerInput != null)
-            {
-                player = playerInput.currentActionMap;
-            }
-            return player;
-        }
-    }
 
     private void Awake()
     {
-        playerInput = this.GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         player = playerInput.currentActionMap;
     }
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+
         speed = normalSpeed;
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (cameraTarget == null)
+        {
+            cameraTarget = new GameObject("CameraTarget").transform;
+            cameraTarget.SetParent(transform, false);
+            cameraTarget.localPosition = cameraTargetLocalOffset;
+            cameraTarget.localRotation = Quaternion.identity;
+        }
+
+        yaw = transform.eulerAngles.y;
+        pitch = 0f;
     }
 
     private void OnEnable()
     {
         jumpAction = player.FindAction("Jump");
-        jumpAction.performed += Jump;
-        jumpAction.Enable();
-
+        if (jumpAction != null)
+        {
+            jumpAction.performed += Jump;
+            jumpAction.Enable();
+        }
 
         sprintAction = player.FindAction("Sprint");
-        sprintAction.performed += StartSprinting;
-        sprintAction.canceled += StopSprinting;
-        sprintAction.Enable();
-        //OnEnableControls += EnableControls;
-        //OnDisableControls += DisableControls;
-
+        if (sprintAction != null)
+        {
+            sprintAction.performed += StartSprinting;
+            sprintAction.canceled += StopSprinting;
+            sprintAction.Enable();
+        }
     }
 
     private void OnDisable()
     {
-        jumpAction.Disable();
-
-        jumpAction.performed -= Jump;
-
-        sprintAction.Disable();
-        sprintAction.performed -= StartSprinting;
-        sprintAction.canceled -= StopSprinting;
-
-
-        //OnDisableControls -= DisableControls;
-        //OnEnableControls -= EnableControls;
-
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= Jump;
+            jumpAction.Disable();
+        }
+        if (sprintAction != null)
+        {
+            sprintAction.performed -= StartSprinting;
+            sprintAction.canceled -= StopSprinting;
+            sprintAction.Disable();
+        }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        //Debug.Log(IsOnSteepSlope());
+        if (!activateControls) return;
 
-        GroundCheck();
-        if (IsOnSteepSlope() && activateControls)
+        // Rotate Rigidbody via physics (yaw only)
+        rb.MoveRotation(Quaternion.Euler(0f, yaw, 0f));
+
+        if (IsOnValidSlope())
         {
-            Movement();
+            MoveCharacter();
         }
     }
 
     private void LateUpdate()
     {
-        if (activateControls)
+        if (!activateControls) return;
+
+        // Manual look (Option A). Disable this block if using Cinemachine POV (Option B).
+        yaw += look.x * sensitivity;
+        pitch = Mathf.Clamp(pitch - look.y * sensitivity, minPitch, maxPitch);
+
+        if (cameraTarget != null)
         {
-            Look();
+            cameraTarget.localPosition = cameraTargetLocalOffset;
+            cameraTarget.localRotation = Quaternion.Euler(pitch, 0f, 0f);
         }
     }
 
-    bool IsOnSteepSlope()
+    private bool IsOnValidSlope()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, Vector3.down, out var hit, 2f))
         {
             float angle = Vector3.Angle(hit.normal, Vector3.up);
             return angle < maxSlopeAngle;
         }
-
-        return false;
+        return true;
     }
 
-    private bool GroundCheck()
+    public void OnMove(InputAction.CallbackContext ctx) => move = ctx.ReadValue<Vector2>();
+    public void OnLook(InputAction.CallbackContext ctx) => look = ctx.ReadValue<Vector2>();
+
+    private void MoveCharacter()
     {
-        //Vector3 origin = transform.position + Vector3.up * 0.1f;
+        Vector3 current = rb.linearVelocity;
 
-        //isGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance);
-        //Debug.DrawRay(origin, Vector3.down * groundCheckDistance, Color.red);
+        // Build basis from the same yaw we apply via MoveRotation
+        Quaternion yawRot = Quaternion.Euler(0f, yaw, 0f);
+        Vector3 forward = yawRot * Vector3.forward;
+        Vector3 right = yawRot * Vector3.right;
 
-        RaycastHit hit;
-        float sphereCastRadius = GetComponent<CapsuleCollider>().radius * 0.05f;
-        float sphereCastTravelDistance = GetComponent<CapsuleCollider>().bounds.extents.y - sphereCastRadius + groundCheckDistance;
+        Vector3 desired = (right * move.x + forward * move.y) * speed;
 
+        Vector3 change = desired - current;
+        change.y = 0f;
+        Vector3.ClampMagnitude(change, maxForce);
 
-        return Physics.SphereCast(rb.position, sphereCastRadius, Vector3.down, out hit, sphereCastTravelDistance);
-
+        rb.AddForce(change, ForceMode.VelocityChange);
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    private void StartSprinting(InputAction.CallbackContext _) => speed = sprintSpeed;
+    private void StopSprinting(InputAction.CallbackContext _) => speed = normalSpeed;
+
+    private void Jump(InputAction.CallbackContext _)
     {
-        move = context.ReadValue<Vector2>();
-        isMoving = context.performed;
-    }
-
-    private void StartSprinting(InputAction.CallbackContext context)
-    {
-        isSprinting = true;
-        speed = sprintSpeed;
-    }
-
-    private void StopSprinting(InputAction.CallbackContext context)
-    {
-        isSprinting = false;
-        speed = normalSpeed;
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        look = context.ReadValue<Vector2>();
-    }
-
-    void Movement()
-    {
-        Vector3 currentVelocity = rb.linearVelocity;
-        //Find target velocity
-        Vector3 targetVelocity = new Vector3(move.x, 0, move.y);
-        targetVelocity *= speed;
-
-        //Align directions
-        targetVelocity = transform.TransformDirection(targetVelocity);
-
-        //Calculate force
-        Vector3 velocityChange = (targetVelocity - currentVelocity);
-        velocityChange = new Vector3(velocityChange.x, 0, velocityChange.z);
-
-        //Limit force
-        Vector3.ClampMagnitude(velocityChange, maxForce);
-
-        rb.AddForce(velocityChange, ForceMode.VelocityChange);
-
-    }
-
-    private void Jump(InputAction.CallbackContext context)
-    {
-        if (GroundCheck() && canJump)
+        if (!canJump) return;
+        if (GroundCheck())
         {
             StartCoroutine(JumpCooldown());
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
+    private bool GroundCheck()
+    {
+        float radius = GetComponent<CapsuleCollider>().radius * 0.5f;
+        float distance = GetComponent<CapsuleCollider>().bounds.extents.y + groundCheckDistance;
+        return Physics.SphereCast(rb.position, radius, Vector3.down, out _, distance);
+    }
+
     private IEnumerator JumpCooldown()
     {
-        canJump = false; // Disable jump temporarily
-        yield return new WaitForSeconds(1f);
-        canJump = true; // Re-enable jump after cooldown
+        canJump = false;
+        yield return new WaitForSeconds(0.5f);
+        canJump = true;
     }
 
-    private void Look()
-    {
-        //Turn player
-        transform.Rotate(Vector3.up * look.x * sensitivity);
+    public void DisableControls() => activateControls = false;
+    public void EnableControls() => activateControls = true;
 
-        //Look up and down
-        lookRotation += (-look.y * sensitivity);
-        lookRotation = Mathf.Clamp(lookRotation, -90, 90);
-        playerInput.camera.transform.eulerAngles = new Vector3(lookRotation, playerInput.camera.transform.eulerAngles.y, playerInput.camera.transform.eulerAngles.z);
-    }
-
-    public void DisableControls()
+    // OPTION B helper: call this if using Cinemachine POV to sync player yaw with camera yaw.
+    public void SyncYawFromCamera(Transform cinemachineCameraTransform)
     {
-        activateControls = false;
-    }
-
-    public void EnableControls()
-    {
-        activateControls = true;
+        Vector3 e = cinemachineCameraTransform.rotation.eulerAngles;
+        yaw = e.y;
     }
 }
