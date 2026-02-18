@@ -24,6 +24,7 @@ public class RFX4_EffectEvent : MonoBehaviour
     public float AdditionalEffect_DestroyTime = 10;
 
     [HideInInspector] public bool IsMobile;
+
     public void ActivateEffect()
     {
 
