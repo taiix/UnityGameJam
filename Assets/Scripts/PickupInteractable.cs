@@ -1,4 +1,3 @@
-using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,8 +27,8 @@ public class PickupInteractable : Interactable
     [SerializeField] private float minVerticalAngle = -85f;
     [SerializeField] private float maxVerticalAngle = 85f;
 
-    private BoxCollider boxCollider;
-    private Rigidbody rb;
+    private Collider objectCollider;
+    public Rigidbody rb;
     private Camera cam;
     private float originalDrag;
     private RigidbodyConstraints originalConstraints;
@@ -37,24 +36,28 @@ public class PickupInteractable : Interactable
     public override void Awake()
     {
         base.Awake();
-        boxCollider = GetComponent<BoxCollider>();
+
+        objectCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         cam = Camera.main;
-        originalDrag = rb.linearDamping;
-        originalConstraints = rb.constraints;
+
+        if (rb != null)
+        {
+            originalDrag = rb.linearDamping;
+            originalConstraints = rb.constraints;
+        }
     }
 
     public override void OnFocus()
     {
         if (!isHeld)
         {
-            if (this.enabled)
+            if (enabled)
             {
                 if (GetComponent<Ingredient>() != null)
-                    interactionText = $"Hold LMB to pick up " +
-                        $"<color=yellow>{GetComponent<Ingredient>().ingredientName}</color>";
-                else interactionText = "Hold LMB to pick up";
-
+                    interactionText = $"Hold LMB to pick up <color=yellow>{GetComponent<Ingredient>().ingredientName}</color>";
+                else
+                    interactionText = "Hold LMB to pick up";
             }
         }
     }
@@ -75,7 +78,8 @@ public class PickupInteractable : Interactable
     public void BeginHold()
     {
         if (isHeld) return;
-        boxCollider.excludeLayers = LayerMask.GetMask("Player");
+        if (rb == null) return;
+
         isHeld = true;
         interactionText = string.Empty;
 
@@ -84,15 +88,17 @@ public class PickupInteractable : Interactable
         rb.freezeRotation = false;
         rb.linearDamping = holdDrag;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
-        if (boxCollider != null)
+
+        if (objectCollider != null)
         {
-            boxCollider.excludeLayers = LayerMask.GetMask("Player");
+            objectCollider.excludeLayers = LayerMask.GetMask("Player");
         }
     }
 
     public void EndHold()
     {
         if (!isHeld) return;
+        if (rb == null) return;
 
         isHeld = false;
 
@@ -100,9 +106,9 @@ public class PickupInteractable : Interactable
         rb.linearDamping = originalDrag;
         rb.constraints = originalConstraints;
 
-        if (boxCollider != null)
+        if (objectCollider != null)
         {
-            boxCollider.excludeLayers = LayerMask.GetMask("Nothing");
+            objectCollider.excludeLayers = LayerMask.GetMask("Nothing");
         }
     }
 
@@ -161,6 +167,7 @@ public class PickupInteractable : Interactable
     private void FixedUpdate()
     {
         if (!isHeld) return;
+        if (rb == null) return;
         if (cam == null) cam = Camera.main;
 
         Vector3 targetPos = cam.transform.position + cam.transform.forward * holdDistance;
