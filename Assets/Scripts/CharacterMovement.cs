@@ -114,15 +114,17 @@ public class CharacterMovement : MonoBehaviour
     {
         if (!activateControls) return;
 
-        rb.MoveRotation(Quaternion.Euler(0f, yaw, 0f));
         yaw += look.x * sensitivity;
-        pitch = Mathf.Clamp(pitch - look.y * sensitivity, minPitch, maxPitch);
+        pitch -= look.y * sensitivity; 
+        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         if (cameraTarget != null)
         {
             cameraTarget.localPosition = cameraTargetLocalOffset;
             cameraTarget.localRotation = Quaternion.Euler(pitch, 0f, 0f);
         }
+
+        rb.MoveRotation(Quaternion.Euler(0f, yaw, 0f));
     }
 
     private bool IsOnValidSlope()
