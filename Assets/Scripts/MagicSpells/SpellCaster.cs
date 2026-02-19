@@ -1,11 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+public enum SpellType
+{
+    DirectionBased, //Cast in the direction player is looking at
+    TargetBased,    //Cast on a specific target
+    PositionBased   //Cast on ground of cast position 
+}
+
 public class SpellCaster : MonoBehaviour
 {
+
+
     [System.Serializable]
     public class SpellDefinition
     {
+        public GameObject spellEffectPrefab;
+        public SpellType spellType;
         public int page;
         public List<string> sequence;
         public string spellName;
@@ -13,6 +24,9 @@ public class SpellCaster : MonoBehaviour
     }
 
     public List<SpellDefinition> knownSpells = new List<SpellDefinition>();
+
+    [SerializeField] private RFX4_EffectEvent spellCastEvent;
+    [SerializeField] private Transform spellTarget;
 
     [Header("Mirroring Settings")]
     public bool mirrorLeftRight = false;
@@ -70,12 +84,18 @@ public class SpellCaster : MonoBehaviour
 
             if (match)
             {
-                Debug.Log($"[SpellCaster] ✅ Match found: {spell.spellName}");
+                Debug.Log($"Match found: {spell.spellName}");
+
+                //get the looking direction as magic direction
+
+
+                spellCastEvent.AssignEffect(spell.spellEffectPrefab);
+                spellCastEvent.ActivateEffect(spell.spellType);
                 return spell.spellName;
             }
         }
 
-        Debug.Log("[SpellCaster] ❌ No matching spell found.");
+        Debug.Log("No matching spell found.");
         return null;
     }
 }

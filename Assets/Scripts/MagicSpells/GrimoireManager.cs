@@ -21,7 +21,6 @@ public class GrimoireManager : MonoBehaviour
     public delegate void PageChanged(int newPageIndex);
     public event PageChanged OnPageChanged;
 
-    // ✅ Spell combos per page
     private Dictionary<int, List<List<string>>> pageCombos = new Dictionary<int, List<List<string>>>
     {
         { 0, new List<List<string>> { new List<string>{ "Top", "Right", "Bottom", "Left" } } },
@@ -73,7 +72,6 @@ public class GrimoireManager : MonoBehaviour
         }
     }
 
-    // ✅ Get valid combos for current page
     public List<List<string>> GetCombosForPage(int pageIndex)
     {
         if (pageCombos.TryGetValue(pageIndex, out var combos))
