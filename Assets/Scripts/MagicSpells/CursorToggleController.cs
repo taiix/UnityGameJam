@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 
 public class CursorToggleController : MonoBehaviour
@@ -35,7 +35,7 @@ public class CursorToggleController : MonoBehaviour
     [Header("Combo Timeout")]
     public float comboClearDelay = 30f;
 
-    // private FirstPersonController controller;
+    private FirstPersonController controller;
     private RectTransform hoveredElement;
     private string lastDirection = "";
     private List<GameObject> spawnedIcons = new List<GameObject>();
@@ -49,11 +49,11 @@ public class CursorToggleController : MonoBehaviour
 
     void Start()
     {
-        grimoire = Object.FindFirstObjectByType<GrimoireManager>();
+        grimoire = FindFirstObjectByType<GrimoireManager>();
 
-        spellCaster = Object.FindFirstObjectByType<SpellCaster>();
+        spellCaster = FindFirstObjectByType<SpellCaster>();
 
-        //controller = GetComponent<FirstPersonController>();
+        controller = GetComponent<FirstPersonController>();
 
         if (directionalUIGroup != null)
         {
@@ -71,7 +71,7 @@ public class CursorToggleController : MonoBehaviour
             directionalUIGroup.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            //controller.cameraCanMove = false;
+            controller.cameraCanMove = false;
         }
 
         if (Input.GetKeyUp(toggleKey))
@@ -80,7 +80,7 @@ public class CursorToggleController : MonoBehaviour
             directionalUIGroup.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            //controller.cameraCanMove = true;
+            controller.cameraCanMove = true;
 
             hoveredElement = null;
             ResetScalesInstantly();
@@ -234,6 +234,7 @@ public class CursorToggleController : MonoBehaviour
         bottomElement.localScale = Vector3.one * normalScale;
         leftElement.localScale = Vector3.one * normalScale;
     }
+
     void TryCastSpell()
     {
         if (grimoire == null || spellCaster == null) return;
@@ -243,12 +244,11 @@ public class CursorToggleController : MonoBehaviour
 
         if (!string.IsNullOrEmpty(spell))
         {
-            Debug.Log($"✨ Casted spell: {spell}");
-            // Optional: trigger animation, VFX, or send spell event
+            Debug.Log($"Casted spell: {spell}");
         }
         else
         {
-            Debug.Log("❌ Invalid spell combo.");
+            Debug.Log("Invalid spell combo.");
         }
     }
 

@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4881640192750095839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1464778168637396688}
+  - component: {fileID: 7776042040484247774}
+  - component: {fileID: 6212197403902702368}
+  m_Layer: 0
+  m_Name: GrimoireManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1464778168637396688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4881640192750095839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 463.62943, y: 230.48642, z: -237.20276}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7776042040484247774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4881640192750095839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0144db189cdb4834a9a9c9b77b2fed3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalPages: 5
+  maxInputsPerPage: 0400000005000000060000000700000008000000
+  pageText: {fileID: 0}
+  grimoirePanel: {fileID: 0}
+  previousPageKey: 113
+  nextPageKey: 101
+--- !u!114 &6212197403902702368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4881640192750095839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6fbc5ec0c918f46b3a110c27c05f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knownSpells:
+  - spellEffectPrefab: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
+    spellType: 2
+    page: 1
+    sequence:
+    - Top
+    - Right
+    - Bottom
+    spellName: Fireball
+    mirrorLeftRight: 1
+  - spellEffectPrefab: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
+    spellType: 0
+    page: 1
+    sequence:
+    - Bottom
+    - Bottom
+    - Bottom
+    - Bottom
+    spellName: Meteorite
+    mirrorLeftRight: 1
+  - spellEffectPrefab: {fileID: 1601494591900918, guid: 61ee9554f7c3b03408fc8258477fddf5, type: 3}
+    spellType: 1
+    page: 1
+    sequence:
+    - Top
+    - Top
+    - Bottom
+    - Left
+    spellName: Meteorite
+    mirrorLeftRight: 1
+  spellCastEvent: {fileID: 0}
+  spellTarget: {fileID: 0}
+  mirrorLeftRight: 1
