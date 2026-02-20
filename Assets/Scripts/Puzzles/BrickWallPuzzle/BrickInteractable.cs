@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class CandleInteractable : PickupInteractable
+public class BrickInteractable : PickupInteractable
 {
-
-    public bool IsSnappedInSlot { get; private set; }
     private Transform snappedParent;
 
     private bool isPlaced = false;
@@ -38,7 +36,7 @@ public class CandleInteractable : PickupInteractable
 
     public override void OnLoseFocus()
     {
-            interactionText = string.Empty;
+        interactionText = string.Empty;
 
     }
 
@@ -49,7 +47,6 @@ public class CandleInteractable : PickupInteractable
 
         EndHold();
 
-        IsSnappedInSlot = true;
         snappedParent = newParent;
 
         transform.SetParent(newParent, worldPositionStays: true);
