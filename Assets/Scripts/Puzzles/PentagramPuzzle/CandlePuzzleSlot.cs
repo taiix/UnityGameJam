@@ -30,8 +30,11 @@ public class CandlePuzzleSlot : MonoBehaviour
 
         occupant = candle;
         occupant.SnapTo(newParent: transform, snapPoint: snapPoint);
-        candleEffect.gameObject.SetActive(true);
-        candleEffect.Play();
+        if (candleEffect != null)
+        {
+            candleEffect.gameObject.SetActive(true);
+            candleEffect.Play();
+        }
 
         manager?.RequestEvaluate();
     }

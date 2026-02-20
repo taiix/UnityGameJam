@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections; // <-- ADD
 
 public class PentagramPuzzleManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PentagramPuzzleManager : MonoBehaviour
     [SerializeField] private GameObject completionParticles;
     [SerializeField] private GameObject objectToSpawn;
     [SerializeField] private Transform spawnPoint;
+
+    [SerializeField] private float spawnDelay = 2f;
 
     public UnityEvent OnPuzzleSolved;
 
@@ -37,7 +40,6 @@ public class PentagramPuzzleManager : MonoBehaviour
     private void Evaluate()
     {
         if (solved) return;
-
         if (slots == null || slots.Length == 0) return;
 
         for (int i = 0; i < slots.Length; i++)
@@ -52,12 +54,18 @@ public class PentagramPuzzleManager : MonoBehaviour
             completionParticles.SetActive(true);
 
         if (objectToSpawn != null)
-        {
-            var point = spawnPoint != null ? spawnPoint : transform;
-            Instantiate(objectToSpawn, point.position, point.rotation);
-            objectToSpawn = null; 
-        }
+            StartCoroutine(SpawnAfterDelay());
 
         OnPuzzleSolved?.Invoke();
+    }
+
+    private IEnumerator SpawnAfterDelay()
+    {
+        yield return new WaitForSeconds(spawnDelay);
+
+        var point = spawnPoint != null ? spawnPoint : transform;
+        Instantiate(objectToSpawn, point.position, point.rotation);
+
+        objectToSpawn = null;
     }
 }
