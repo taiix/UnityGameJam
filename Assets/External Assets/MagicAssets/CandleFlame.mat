@@ -123,8 +123,13 @@ Material:
     - _DistortionEnabled: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
+<<<<<<< HEAD
     - _DstBlend: 1
     - _DstBlendAlpha: 1
+=======
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
+>>>>>>> origin/SimonTest
     - _EmissionEnabled: 0
     - _EnvironmentReflections: 1
     - _FlipbookBlending: 0
@@ -155,7 +160,11 @@ Material:
     - _BaseColor: {r: 5.340314, g: 3.2386625, b: 0.8312753, a: 1}
     - _BaseColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+<<<<<<< HEAD
     - _Color: {r: 5.3403144, g: 3.2386627, b: 0.8312753, a: 1}
+=======
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+>>>>>>> origin/SimonTest
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
