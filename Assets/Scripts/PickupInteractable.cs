@@ -118,6 +118,8 @@ public class PickupInteractable : Interactable
 
         HandleScrollAdjustDistance();
         HandleRotation();
+
+
     }
 
     private void HandleScrollAdjustDistance()
