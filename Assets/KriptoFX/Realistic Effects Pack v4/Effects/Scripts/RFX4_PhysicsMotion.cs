@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -114,6 +112,11 @@ public class RFX4_PhysicsMotion : MonoBehaviour
             if (EffectOnCollision != null)
             {
                 var instance = Instantiate(EffectOnCollision, contact.point, new Quaternion()) as GameObject;
+                
+                if (EffectOnCollision.gameObject.name == "Effect23_Explosion") {
+                    //Fireball explosion effect has some specific color changing
+                    EventManager.OnFireballHit?.Invoke();
+                }
 
                 if (HUE > -0.9f) RFX4_ColorHelper.ChangeObjectColorByHUE(instance, HUE);
                 

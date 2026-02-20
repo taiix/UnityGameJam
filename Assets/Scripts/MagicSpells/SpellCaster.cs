@@ -5,7 +5,9 @@ public enum SpellType
 {
     DirectionBased, //Cast in the direction player is looking at
     TargetBased,    //Cast on a specific target
-    PositionBased   //Cast on ground of cast position 
+    PositionBased,   //Cast on ground of cast position 
+    Lumos,
+    Nox
 }
 
 public class SpellCaster : MonoBehaviour
@@ -26,7 +28,6 @@ public class SpellCaster : MonoBehaviour
     public List<SpellDefinition> knownSpells = new List<SpellDefinition>();
 
     [SerializeField] private RFX4_EffectEvent spellCastEvent;
-    [SerializeField] private Transform spellTarget;
 
     [Header("Mirroring Settings")]
     public bool mirrorLeftRight = false;
@@ -90,7 +91,7 @@ public class SpellCaster : MonoBehaviour
 
 
                 spellCastEvent.AssignEffect(spell.spellEffectPrefab);
-                spellCastEvent.ActivateEffect(spell.spellType);
+                spellCastEvent.ActivateEffect(spell.spellType, spellCastEvent.gameObject.transform);
                 return spell.spellName;
             }
         }
