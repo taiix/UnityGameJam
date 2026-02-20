@@ -29,9 +29,9 @@ public class RFX4_EffectEvent : MonoBehaviour
         MainEffect = effectPrefab;
     }
 
-    public void ActivateEffect(SpellType spellType)
+    public void ActivateEffect(SpellType spellType, Transform parent)
     {
-        if (MainEffect == null || AttachPoint == null)
+        if (MainEffect == null && spellType != SpellType.Nox || AttachPoint == null)
         {
             return;
         }
@@ -64,7 +64,8 @@ public class RFX4_EffectEvent : MonoBehaviour
                 switch (spellType)
                 {
                     case SpellType.DirectionBased:
-                        {                            Vector3 dirFromAttach = (targetPoint - AttachPoint.position).normalized;
+                        {
+                            Vector3 dirFromAttach = (targetPoint - AttachPoint.position).normalized;
                             if (dirFromAttach.sqrMagnitude < 0.0001f)
                             {
                                 dirFromAttach = dirFromCamera;
@@ -110,7 +111,20 @@ public class RFX4_EffectEvent : MonoBehaviour
                                 Quaternion.identity);
                             break;
                         }
-
+                    case SpellType.Lumos:
+                        {
+                            instance = Instantiate(
+                                MainEffect,
+                                parent.GetChild(0).transform.position,
+                                Quaternion.identity, parent.GetChild(0));
+                            break;
+                        }
+                    case SpellType.Nox:
+                        {
+                            if (parent.GetChild(0).childCount > 0)
+                                Destroy(parent.GetChild(0).GetChild(0).gameObject);
+                            break;
+                        }
                     default:
                         {
                             instance = Instantiate(

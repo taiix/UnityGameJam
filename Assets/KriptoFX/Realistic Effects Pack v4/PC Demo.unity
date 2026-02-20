@@ -142958,6 +142958,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterMobile
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 07e2cbbf6d66b844bb3b416cb21b1677, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 07e2cbbf6d66b844bb3b416cb21b1677, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.274108
