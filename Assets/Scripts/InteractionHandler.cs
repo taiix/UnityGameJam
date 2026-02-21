@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,9 +19,13 @@ public class InteractionHandler : MonoBehaviour
     private PlayerInput playerInput;
 
     [SerializeField] public GameObject interactionUI;
+    [SerializeField] private Transform holdParent;
 
     private InputAction grabAction;
     private PickupInteractable heldPickup;
+
+    // Track original parent so we can restore it on drop.
+    private readonly Dictionary<PickupInteractable, Transform> originalParents = new Dictionary<PickupInteractable, Transform>();
 
     private void Awake()
     {
@@ -31,6 +36,9 @@ public class InteractionHandler : MonoBehaviour
         inputAsset = playerInput.actions;
         player = inputAsset.FindActionMap("Player");
         mainCamera = Camera.main;
+
+        if (holdParent == null)
+            holdParent = transform;
     }
 
     private void OnEnable()
@@ -120,28 +128,61 @@ public class InteractionHandler : MonoBehaviour
 
         if (currentInteractable is PickupInteractable pickup)
         {
-
-            heldPickup = pickup;
-            heldPickup.BeginHold();
+            GrabPickup(pickup);
             interactionUI.SetActive(false);
         }
     }
 
     private void OnGrabCanceled(InputAction.CallbackContext ctx)
     {
-        if (heldPickup != null)
-        {
-            heldPickup.EndHold();
-            heldPickup = null;
+        DropHeldPickup();
+    }
 
-            if (currentInteractable != null)
+    // Allows spells to use the same hold/drop logic.
+    public bool GrabPickup(PickupInteractable pickup)
+    {
+        if (pickup == null) return false;
+        if (heldPickup != null) return false;
+
+        heldPickup = pickup;
+
+        // Cache original parent (only once).
+        if (!originalParents.ContainsKey(pickup))
+            originalParents[pickup] = pickup.transform.parent;
+
+        // Parent to player hold point.
+        if (holdParent != null)
+            pickup.transform.SetParent(holdParent, worldPositionStays: true);
+
+        heldPickup.BeginHold();
+        return true;
+    }
+
+    public void DropHeldPickup()
+    {
+        if (heldPickup == null) return;
+
+        // Restore original parent if we have it.
+        if (originalParents.TryGetValue(heldPickup, out var originalParent))
+        {
+            heldPickup.transform.SetParent(originalParent, worldPositionStays: true);
+            originalParents.Remove(heldPickup);
+        }
+        else
+        {
+            heldPickup.transform.SetParent(null, worldPositionStays: true);
+        }
+
+        heldPickup.EndHold();
+        heldPickup = null;
+
+        if (currentInteractable != null)
+        {
+            currentInteractable.OnFocus();
+            if (!string.IsNullOrEmpty(currentInteractable.interactionText))
             {
-                currentInteractable.OnFocus();
-                if (!string.IsNullOrEmpty(currentInteractable.interactionText))
-                {
-                    interactionUI.GetComponentInChildren<TextMeshProUGUI>().text = currentInteractable.interactionText;
-                    interactionUI.SetActive(true);
-                }
+                interactionUI.GetComponentInChildren<TextMeshProUGUI>().text = currentInteractable.interactionText;
+                interactionUI.SetActive(true);
             }
         }
     }
