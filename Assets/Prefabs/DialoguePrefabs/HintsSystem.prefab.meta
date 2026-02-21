@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/DialoguePrefabs/HintsSystem.prefab.meta
 guid: 38b3762ea4953cf479a912d993fac50c
 PrefabImporter:
+========
+guid: 754ab8d022708e54eaaa8ade4b5ac1f4
+NativeFormatImporter:
+>>>>>>>> origin/somethingLikeRipple:Assets/Shaders/Ripple.mat.meta
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
