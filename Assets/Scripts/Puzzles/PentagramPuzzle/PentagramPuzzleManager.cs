@@ -45,10 +45,15 @@ public class PentagramPuzzleManager : MonoBehaviour
         for (int i = 0; i < slots.Length; i++)
         {
             if (!slots[i].IsSatisfied)
+            {
+                Debug.Log($"[PentagramPuzzle] Slot {i} not satisfied. HasOccupant={slots[i].HasOccupant} IsSatisfied={slots[i].IsSatisfied} SlotName={slots[i].name}");
                 return;
+            }
         }
 
         solved = true;
+
+        Debug.Log("[PentagramPuzzle] Solved!");
 
         if (completionParticles != null)
             completionParticles.SetActive(true);

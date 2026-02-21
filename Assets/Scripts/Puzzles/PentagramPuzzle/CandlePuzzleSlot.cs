@@ -30,7 +30,7 @@ public class CandlePuzzleSlot : MonoBehaviour
         if (candle.IsSnappedInSlot) return;
 
         occupant = candle;
-        occupant.SnapTo(newParent: transform, snapPoint: snapPoint);
+        occupant.SnapTo(this.transform, snapPoint: snapPoint);
 
 
         manager?.RequestEvaluate();

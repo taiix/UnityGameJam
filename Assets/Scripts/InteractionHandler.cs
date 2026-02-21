@@ -162,7 +162,25 @@ public class InteractionHandler : MonoBehaviour
     {
         if (heldPickup == null) return;
 
-        // Restore original parent if we have it.
+        if (heldPickup is CandleInteractable candle && candle.IsSnappedInSlot)
+        {
+            originalParents.Remove(heldPickup);
+            heldPickup.EndHold();
+            heldPickup = null;
+
+            if (currentInteractable != null)
+            {
+                currentInteractable.OnFocus();
+                if (!string.IsNullOrEmpty(currentInteractable.interactionText))
+                {
+                    interactionUI.GetComponentInChildren<TextMeshProUGUI>().text = currentInteractable.interactionText;
+                    interactionUI.SetActive(true);
+                }
+            }
+
+            return;
+        }
+
         if (originalParents.TryGetValue(heldPickup, out var originalParent))
         {
             heldPickup.transform.SetParent(originalParent, worldPositionStays: true);

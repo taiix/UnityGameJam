@@ -62,7 +62,7 @@ public class CandleInteractable : PickupInteractable
         IsSnappedInSlot = true;
         snappedParent = newParent;
 
-        transform.SetParent(newParent, worldPositionStays: true);
+        transform.SetParent(newParent);
         transform.position = snapPoint.position;
         transform.rotation = snapPoint.rotation;
 
@@ -96,9 +96,7 @@ public class CandleInteractable : PickupInteractable
 
         var slot = GetComponentInParent<CandlePuzzleSlot>();
 
-        if (slot != null)
-        {
             slot?.NotifyOccupantLit();
-        }
+        
     }
 }
