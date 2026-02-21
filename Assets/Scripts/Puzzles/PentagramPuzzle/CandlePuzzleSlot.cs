@@ -3,13 +3,14 @@ using UnityEngine;
 public class CandlePuzzleSlot : MonoBehaviour
 {
     [SerializeField] private Transform snapPoint;
-    [SerializeField] private ParticleSystem candleEffect;
 
     private CandleInteractable occupant;
     private PentagramPuzzleManager manager;
 
     public bool HasOccupant => occupant != null;
-    public bool IsSatisfied => occupant != null;
+
+    // Slot is satisfied only if a candle is placed AND lit.
+    public bool IsSatisfied => occupant != null && occupant.IsLit;
 
     private void Awake()
     {
@@ -30,12 +31,13 @@ public class CandlePuzzleSlot : MonoBehaviour
 
         occupant = candle;
         occupant.SnapTo(newParent: transform, snapPoint: snapPoint);
-        if (candleEffect != null)
-        {
-            candleEffect.gameObject.SetActive(true);
-            candleEffect.Play();
-        }
 
+
+        manager?.RequestEvaluate();
+    }
+
+    public void NotifyOccupantLit()
+    {
         manager?.RequestEvaluate();
     }
 }

@@ -83,6 +83,7 @@ public class PickupInteractable : Interactable
         isHeld = true;
         interactionText = string.Empty;
 
+        
         rb.isKinematic = false;
         rb.useGravity = false;
         rb.freezeRotation = false;
