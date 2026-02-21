@@ -23,6 +23,7 @@ public class CharacterMovement : MonoBehaviour
     [Tooltip("Child transform used as Tracking Target for CinemachineCamera (NOT the MainCamera).")]
     [SerializeField] private Transform cameraTarget;
     [SerializeField] private Vector3 cameraTargetLocalOffset = new Vector3(0f, 1.7f, 0f);
+    [SerializeField] private bool cameraCanMove = true;
 
     private Rigidbody rb;
     private PlayerInput playerInput;
@@ -114,9 +115,12 @@ public class CharacterMovement : MonoBehaviour
     {
         if (!activateControls) return;
 
-        yaw += look.x * sensitivity;
-        pitch -= look.y * sensitivity; 
-        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+        if (cameraCanMove)
+        {
+            yaw += look.x * sensitivity;
+            pitch -= look.y * sensitivity;
+            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+        }
 
         if (cameraTarget != null)
         {
@@ -124,6 +128,7 @@ public class CharacterMovement : MonoBehaviour
             cameraTarget.localRotation = Quaternion.Euler(pitch, 0f, 0f);
         }
 
+        // Still apply the current yaw even when cameraCanMove == false (keeps orientation stable).
         rb.MoveRotation(Quaternion.Euler(0f, yaw, 0f));
     }
 
@@ -138,7 +143,18 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void OnMove(InputAction.CallbackContext ctx) => move = ctx.ReadValue<Vector2>();
-    public void OnLook(InputAction.CallbackContext ctx) => look = ctx.ReadValue<Vector2>();
+
+    public void OnLook(InputAction.CallbackContext ctx)
+    {
+        // Prevent input from accumulating while locked.
+        if (!cameraCanMove)
+        {
+            look = Vector2.zero;
+            return;
+        }
+
+        look = ctx.ReadValue<Vector2>();
+    }
 
     private void MoveCharacter()
     {
@@ -182,8 +198,11 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void DisableControls() => activateControls = false;
-
     public void EnableControls() => activateControls = true;
+
+    public void DisableCameraMovement() => cameraCanMove = false;
+    public void EnableCameraMovement() => cameraCanMove = true;
+    public void SetCameraMovement(bool enabled) => cameraCanMove = enabled;
 
     // Animate pitch over time, then optionally disable controls and invoke onComplete.
     public void AnimatePitch(float targetPitch, float duration, AnimationCurve curve, bool disableControlsAfter = true, System.Action onComplete = null)
