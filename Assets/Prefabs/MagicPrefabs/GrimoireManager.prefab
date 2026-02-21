@@ -64,15 +64,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knownSpells:
-  - spellEffectPrefab: {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
-    spellType: 2
-    page: 1
-    sequence:
-    - Top
-    - Right
-    - Bottom
-    spellName: Fireball
-    mirrorLeftRight: 1
   - spellEffectPrefab: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
     spellType: 0
     page: 1
@@ -83,16 +74,49 @@ MonoBehaviour:
     - Bottom
     spellName: Meteorite
     mirrorLeftRight: 1
-  - spellEffectPrefab: {fileID: 1601494591900918, guid: 61ee9554f7c3b03408fc8258477fddf5, type: 3}
+  - spellEffectPrefab: {fileID: 119242, guid: 4bc451a9c5656db4794e16cdecbabbac, type: 3}
     spellType: 1
     page: 1
     sequence:
     - Top
     - Top
-    - Bottom
-    - Left
-    spellName: Meteorite
+    - Top
+    - Top
+    spellName: Confringo
+    mirrorLeftRight: 0
+  - spellEffectPrefab: {fileID: 5598234075872813079, guid: 35990dc2cf614314daa2b47284b04dd8, type: 3}
+    spellType: 3
+    page: 1
+    sequence:
+    - Top
+    - Right
+    spellName: Lumos
+    mirrorLeftRight: 0
+  - spellEffectPrefab: {fileID: 0}
+    spellType: 4
+    page: 1
+    sequence:
+    - Right
+    - Top
+    spellName: Nox
     mirrorLeftRight: 1
+  - spellEffectPrefab: {fileID: 4970218362758301885, guid: cfb21b5941add5d4680217eefd4c1558, type: 3}
+    spellType: 2
+    page: 1
+    sequence:
+    - Right
+    - Right
+    - Left
+    spellName: Revelio
+    mirrorLeftRight: 0
+  - spellEffectPrefab: {fileID: 0}
+    spellType: 0
+    page: 1
+    sequence:
+    - Top
+    - Bottom
+    - Bottom
+    spellName: Levitas
+    mirrorLeftRight: 0
   spellCastEvent: {fileID: 0}
-  spellTarget: {fileID: 0}
   mirrorLeftRight: 1
