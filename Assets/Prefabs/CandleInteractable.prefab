@@ -5158,6 +5158,7 @@ GameObject:
   - component: {fileID: 8518646466904400925}
   - component: {fileID: 4674405849627943165}
   - component: {fileID: 2262606482443100838}
+  - component: {fileID: 8498884259847718141}
   m_Layer: 6
   m_Name: CandleInteractable
   m_TagString: Untagged
@@ -5255,17 +5256,17 @@ MonoBehaviour:
   isHeld: 0
   isThrown: 0
   interactionText: Hold LMB to pick up
-  holdDistance: 1
+  holdDistance: 2
   moveSpeed: 12
   maxDistanceBeforeDrop: 5
   holdDrag: 10
-  minHoldDistance: 1
+  minHoldDistance: 0.5
   maxHoldDistance: 4
   scrollDistanceStep: 10
   invertScroll: 0
-  horizontalRotateSpeed: 60
-  verticalRotateSpeed: 60
-  clampVertical: 1
+  horizontalRotateSpeed: 100
+  verticalRotateSpeed: 100
+  clampVertical: 0
   minVerticalAngle: -85
   maxVerticalAngle: 85
   rb: {fileID: 0}
@@ -5320,3 +5321,17 @@ CapsuleCollider:
   m_Height: 0.093857266
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8498884259847718141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956323624443893049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802e7df2a4b398b41ae42a035cb1fd72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  renderers:
+  - {fileID: 33315633067469478}
