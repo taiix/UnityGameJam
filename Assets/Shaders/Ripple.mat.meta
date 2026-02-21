@@ -1,11 +1,20 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<<< HEAD:Assets/Prefabs/DialoguePrefabs/DialogueCanvas.prefab.meta
+guid: 3c3578868eee2a94fb140b7f2ce15e1d
+=======
 <<<<<<<< HEAD:Assets/Prefabs/DialoguePrefabs/HintsSystem.prefab.meta
 guid: 38b3762ea4953cf479a912d993fac50c
+>>>>>>> origin/somethingLikeRipple
 PrefabImporter:
 ========
 guid: 754ab8d022708e54eaaa8ade4b5ac1f4
 NativeFormatImporter:
+<<<<<<< HEAD
+>>>>>>>> 809488b (ripple ish shader):Assets/Shaders/Ripple.mat.meta
+=======
 >>>>>>>> origin/somethingLikeRipple:Assets/Shaders/Ripple.mat.meta
+>>>>>>> origin/somethingLikeRipple
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
