@@ -5576,15 +5576,12 @@ PrefabInstance:
     - target: {fileID: 4794755218524025421, guid: 921032f0a7d1e1449aafa06491e294a4, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 307505280}
     - target: {fileID: 7737755888792416329, guid: 921032f0a7d1e1449aafa06491e294a4, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 1416623380}
     - target: {fileID: 8710713315070411513, guid: 921032f0a7d1e1449aafa06491e294a4, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 1446673566}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5645,11 +5642,9 @@ PrefabInstance:
     - target: {fileID: 7584513031227088049, guid: 38b3762ea4953cf479a912d993fac50c, type: 3}
       propertyPath: dialogCanvas
       value: 
-      objectReference: {fileID: 1824714674}
     - target: {fileID: 7584513031227088049, guid: 38b3762ea4953cf479a912d993fac50c, type: 3}
       propertyPath: dialogueTextBox
       value: 
-      objectReference: {fileID: 894844234}
     - target: {fileID: 7584513031227088049, guid: 38b3762ea4953cf479a912d993fac50c, type: 3}
       propertyPath: 'otherCanvases.Array.data[0]'
       value: 
@@ -5657,7 +5652,6 @@ PrefabInstance:
     - target: {fileID: 7584513031227088049, guid: 38b3762ea4953cf479a912d993fac50c, type: 3}
       propertyPath: 'otherCanvases.Array.data[1]'
       value: 
-      objectReference: {fileID: 62504698}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7718,6 +7712,5 @@ SceneRoots:
   - {fileID: 3229763503662145705}
   - {fileID: 2027370959}
   - {fileID: 8317972713230048218}
-  - {fileID: 1799588249}
   - {fileID: 626776145}
   - {fileID: 262258026}
