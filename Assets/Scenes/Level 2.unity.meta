@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Level 2.unity.meta
 guid: e5f7641cbdd8b6c44bdc8fef5bc94adf
+========
+guid: 276961fe38566ce46a87f934c5b7ea70
+folderAsset: yes
+>>>>>>>> origin/hints:Assets/Prefabs/DialoguePrefabs.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
