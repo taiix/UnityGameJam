@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum SpellType
@@ -7,7 +8,7 @@ public enum SpellType
     TargetBased,    //Cast on a specific target
     PositionBased,   //Cast on ground of cast position 
     Lumos,
-    Nox
+    Nox,
 }
 
 public class SpellCaster : MonoBehaviour
@@ -26,6 +27,9 @@ public class SpellCaster : MonoBehaviour
     }
 
     public List<SpellDefinition> knownSpells = new List<SpellDefinition>();
+
+    public static event Action<string,Vector3> OnSpellCast;
+
 
     [SerializeField] private RFX4_EffectEvent spellCastEvent;
 
@@ -88,10 +92,13 @@ public class SpellCaster : MonoBehaviour
                 Debug.Log($"Match found: {spell.spellName}");
 
                 //get the looking direction as magic direction
-
+                
 
                 spellCastEvent.AssignEffect(spell.spellEffectPrefab);
                 spellCastEvent.ActivateEffect(spell.spellType, spellCastEvent.gameObject.transform);
+
+                OnSpellCast?.Invoke(spell.spellName,spellCastEvent.gameObject.transform.position);
+
                 return spell.spellName;
             }
         }

@@ -24,9 +24,29 @@ public class RFX4_EffectEvent : MonoBehaviour
 
     [HideInInspector] public bool IsMobile;
 
+    [Header("AnimationEvent Support")]
+    [Tooltip("Used by AnimationEvent wrappers. If null, uses this transform.")]
+    [SerializeField] private Transform animationEventParent;
+
     public void AssignEffect(GameObject effectPrefab)
     {
         MainEffect = effectPrefab;
+    }
+
+    // AnimationEvent-compatible overloads (0 or 1 param only)
+    public void ActivateEffect()
+    {
+        ActivateEffect(SpellType.DirectionBased, animationEventParent != null ? animationEventParent : transform);
+    }
+
+    public void ActivateEffect(SpellType spellType)
+    {
+        ActivateEffect(spellType, animationEventParent != null ? animationEventParent : transform);
+    }
+
+    public void ActivateEffect(int spellType)
+    {
+        ActivateEffect((SpellType)spellType, animationEventParent != null ? animationEventParent : transform);
     }
 
     public void ActivateEffect(SpellType spellType, Transform parent)
@@ -239,14 +259,9 @@ public class RFX4_EffectEvent : MonoBehaviour
 
     void UpdateEffectForMobileIsNeed(GameObject instance)
     {
-        //if (IsMobile)
+        var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
+        if (effectSettings != null)
         {
-            var effectSettings = instance.GetComponent<RFX4_EffectSettings>();
-            if (effectSettings != null)
-            {
-                //effectSettings.EffectQuality = IsMobile ? RFX4_EffectSettings.Quality.Mobile : RFX4_EffectSettings.Quality.PC;
-                //effectSettings.ForceInitialize();
-            }
         }
     }
 }
