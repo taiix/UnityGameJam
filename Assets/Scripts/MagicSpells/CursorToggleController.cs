@@ -36,6 +36,8 @@ public class CursorToggleController : MonoBehaviour
     public float comboClearDelay = 30f;
 
     private FirstPersonController controller;
+
+    private CharacterMovement characterController;
     private RectTransform hoveredElement;
     private string lastDirection = "";
     private List<GameObject> spawnedIcons = new List<GameObject>();
@@ -54,6 +56,7 @@ public class CursorToggleController : MonoBehaviour
         spellCaster = FindFirstObjectByType<SpellCaster>();
 
         controller = GetComponent<FirstPersonController>();
+        characterController = GetComponent<CharacterMovement>();
 
         if (directionalUIGroup != null)
         {
@@ -71,7 +74,14 @@ public class CursorToggleController : MonoBehaviour
             directionalUIGroup.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            controller.cameraCanMove = false;
+            if (controller)
+            {
+                controller.cameraCanMove = false;
+            }
+            if (characterController)
+            {
+                characterController.DisableCameraMovement();    
+            }
         }
 
         if (Input.GetKeyUp(toggleKey))
@@ -80,7 +90,14 @@ public class CursorToggleController : MonoBehaviour
             directionalUIGroup.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            controller.cameraCanMove = true;
+            if (controller)
+            {
+                controller.cameraCanMove = true;
+            }
+            if (characterController)
+            {
+                characterController.EnableCameraMovement();
+            }
 
             hoveredElement = null;
             ResetScalesInstantly();
