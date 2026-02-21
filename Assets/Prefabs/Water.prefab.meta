@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Water.prefab.meta
 guid: 8093b957917c2204a983bcc193aa5bd4
+========
+guid: 4845081df5c000a46a3b57695e47289f
+>>>>>>>> origin/Room1:Assets/Prefabs/Infiinite Staircase.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
