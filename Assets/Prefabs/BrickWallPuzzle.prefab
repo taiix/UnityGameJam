@@ -14401,7 +14401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4337788105565218964}
   - component: {fileID: 7317473491416774321}
-  - component: {fileID: 5113847074516102418}
+  - component: {fileID: 5808738119772477337}
   m_Layer: 0
   m_Name: SnapPositionBrick_1
   m_TagString: Untagged
@@ -14446,7 +14446,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.383702, y: 0.21467686, z: 0.06952667}
   m_Center: {x: -0.0046517947, y: -0.21269083, z: 0.03180313}
---- !u!114 &5113847074516102418
+--- !u!114 &5808738119772477337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14455,11 +14455,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1759571130777921144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 192ff1d30a5664045972136b62e54e31, type: 3}
+  m_Script: {fileID: 11500000, guid: 1805e138217f6d44cbc72b0cfca6ff1e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CandlePuzzleSlot
+  m_EditorClassIdentifier: Assembly-CSharp::BrickPuzzleSlot
   snapPoint: {fileID: 4337788105565218964}
-  candleEffect: {fileID: 8706344281717764014}
+  IsSatisfied: 0
 --- !u!1 &1762276883384421763
 GameObject:
   m_ObjectHideFlags: 0
@@ -15033,7 +15033,7 @@ GameObject:
   - component: {fileID: 2280010674077693497}
   - component: {fileID: 7377198323288704129}
   - component: {fileID: 5182600007032091589}
-  - component: {fileID: 2201152271909257224}
+  - component: {fileID: 2225300024001498025}
   m_Layer: 0
   m_Name: MissingBrick_1
   m_TagString: Untagged
@@ -15161,7 +15161,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2201152271909257224
+--- !u!114 &2225300024001498025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15170,9 +15170,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1849986376867053493}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ab08359727888a4c9d8e799909abe65, type: 3}
+  m_Script: {fileID: 11500000, guid: 78c6e37d89a074f46a919188b58e35ab, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CandleInteractable
+  m_EditorClassIdentifier: Assembly-CSharp::BrickInteractable
   isHeld: 0
   isThrown: 0
   interactionText: 
@@ -15180,16 +15180,17 @@ MonoBehaviour:
   moveSpeed: 12
   maxDistanceBeforeDrop: 5
   holdDrag: 10
-  minHoldDistance: 0.5
+  minHoldDistance: 1
   maxHoldDistance: 4
   scrollDistanceStep: 10
   invertScroll: 0
-  horizontalRotateSpeed: 100
-  verticalRotateSpeed: 100
-  clampVertical: 0
+  horizontalRotateSpeed: 60
+  verticalRotateSpeed: 60
+  clampVertical: 1
   minVerticalAngle: -85
   maxVerticalAngle: 85
   rb: {fileID: 0}
+  placedEffect: {fileID: 8706344281717764014}
 --- !u!1 &1856654263323380826
 GameObject:
   m_ObjectHideFlags: 0
@@ -15314,8 +15315,8 @@ GameObject:
   - component: {fileID: 2034196749408165271}
   - component: {fileID: 7458331682556141021}
   - component: {fileID: 8098600458078891851}
-  - component: {fileID: 3782686411413638232}
   - component: {fileID: 4153461144826224495}
+  - component: {fileID: 4632358605898293872}
   m_Layer: 0
   m_Name: MissingBrick_2
   m_TagString: Untagged
@@ -15416,35 +15417,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3782686411413638232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883069186678461032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ab08359727888a4c9d8e799909abe65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CandleInteractable
-  isHeld: 0
-  isThrown: 0
-  interactionText: 
-  holdDistance: 1
-  moveSpeed: 12
-  maxDistanceBeforeDrop: 5
-  holdDrag: 10
-  minHoldDistance: 0.5
-  maxHoldDistance: 4
-  scrollDistanceStep: 10
-  invertScroll: 0
-  horizontalRotateSpeed: 100
-  verticalRotateSpeed: 100
-  clampVertical: 1
-  minVerticalAngle: -85
-  maxVerticalAngle: 85
-  rb: {fileID: 0}
 --- !u!54 &4153461144826224495
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15471,7 +15443,37 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
+--- !u!114 &4632358605898293872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883069186678461032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c6e37d89a074f46a919188b58e35ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BrickInteractable
+  isHeld: 0
+  isThrown: 0
+  interactionText: 
+  holdDistance: 1
+  moveSpeed: 12
+  maxDistanceBeforeDrop: 5
+  holdDrag: 10
+  minHoldDistance: 1
+  maxHoldDistance: 4
+  scrollDistanceStep: 10
+  invertScroll: 0
+  horizontalRotateSpeed: 60
+  verticalRotateSpeed: 60
+  clampVertical: 1
+  minVerticalAngle: -85
+  maxVerticalAngle: 85
+  rb: {fileID: 0}
+  placedEffect: {fileID: 813394378247296334}
 --- !u!1 &1886680256930648078
 GameObject:
   m_ObjectHideFlags: 0
@@ -23058,7 +23060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 450703261084906353}
   - component: {fileID: 1779426779837236345}
-  - component: {fileID: 8325857374757199568}
+  - component: {fileID: 2905568152307434139}
   m_Layer: 0
   m_Name: SnapPositionBrick_2
   m_TagString: Untagged
@@ -23103,7 +23105,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.383702, y: 0.21467686, z: 0.09008026}
   m_Center: {x: -0.0046517947, y: -0.21269083, z: 0.042079926}
---- !u!114 &8325857374757199568
+--- !u!114 &2905568152307434139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23112,11 +23114,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2480170748492864840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 192ff1d30a5664045972136b62e54e31, type: 3}
+  m_Script: {fileID: 11500000, guid: 1805e138217f6d44cbc72b0cfca6ff1e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CandlePuzzleSlot
+  m_EditorClassIdentifier: Assembly-CSharp::BrickPuzzleSlot
   snapPoint: {fileID: 450703261084906353}
-  candleEffect: {fileID: 813394378247296334}
+  IsSatisfied: 0
 --- !u!1 &2487299347280718774
 GameObject:
   m_ObjectHideFlags: 0
@@ -30854,7 +30856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 336004409473536487}
-  - component: {fileID: 8417989129595084941}
+  - component: {fileID: 2387207807290757154}
   m_Layer: 0
   m_Name: BrickWallPuzzle
   m_TagString: Untagged
@@ -30887,7 +30889,7 @@ Transform:
   - {fileID: 8507637718318000257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8417989129595084941
+--- !u!114 &2387207807290757154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30896,13 +30898,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3721479080104069557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4e087d88167ef419f588f1e6a40634, type: 3}
+  m_Script: {fileID: 11500000, guid: 09cd160187b9a0c43972279ea51ab610, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PentagramPuzzleManager
+  m_EditorClassIdentifier: Assembly-CSharp::BrickWallPuzzleManager
   slots:
-  - {fileID: 5113847074516102418}
-  - {fileID: 8325857374757199568}
-  - {fileID: 7502143200710023269}
+  - {fileID: 5808738119772477337}
+  - {fileID: 2905568152307434139}
+  - {fileID: 1363140872022925417}
   completionParticles: {fileID: 902992024706762687}
   objectToSpawn: {fileID: 5419392909405531304, guid: 14c778a77174f364b84b0c3d1a852d08, type: 3}
   spawnPoint: {fileID: 6038986549182036925}
@@ -72679,7 +72681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3257302850087070740}
   - component: {fileID: 8350653227569183005}
-  - component: {fileID: 7502143200710023269}
+  - component: {fileID: 1363140872022925417}
   m_Layer: 0
   m_Name: SnapPositionBrick3
   m_TagString: Untagged
@@ -72724,7 +72726,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.383702, y: 0.21467686, z: 0.06952667}
   m_Center: {x: -0.0046517947, y: -0.21269083, z: 0.03180313}
---- !u!114 &7502143200710023269
+--- !u!114 &1363140872022925417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72733,11 +72735,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8526866898729480300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 192ff1d30a5664045972136b62e54e31, type: 3}
+  m_Script: {fileID: 11500000, guid: 1805e138217f6d44cbc72b0cfca6ff1e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CandlePuzzleSlot
-  snapPoint: {fileID: 3257302850087070740}
-  candleEffect: {fileID: 7354333060022914017}
+  m_EditorClassIdentifier: Assembly-CSharp::BrickPuzzleSlot
+  snapPoint: {fileID: 7194989524747218228}
+  IsSatisfied: 0
 --- !u!1 &8528560812209768328
 GameObject:
   m_ObjectHideFlags: 0
@@ -76907,7 +76909,7 @@ Transform:
   m_GameObject: {fileID: 9166537582797173619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.999, y: -1.202, z: 0.573}
+  m_LocalPosition: {x: -0.966, y: -1.202, z: 0.573}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77149,8 +77151,8 @@ GameObject:
   - component: {fileID: 7694953079729335214}
   - component: {fileID: 2628807957327450821}
   - component: {fileID: 1940474934255281795}
-  - component: {fileID: 1217820968294946388}
   - component: {fileID: 1313874286571347081}
+  - component: {fileID: 5255690350267512432}
   m_Layer: 0
   m_Name: MissingBrick_3
   m_TagString: Untagged
@@ -77251,35 +77253,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1217820968294946388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9193019868449888891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ab08359727888a4c9d8e799909abe65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CandleInteractable
-  isHeld: 0
-  isThrown: 0
-  interactionText: 
-  holdDistance: 1
-  moveSpeed: 12
-  maxDistanceBeforeDrop: 5
-  holdDrag: 10
-  minHoldDistance: 0.5
-  maxHoldDistance: 4
-  scrollDistanceStep: 10
-  invertScroll: 0
-  horizontalRotateSpeed: 100
-  verticalRotateSpeed: 100
-  clampVertical: 0
-  minVerticalAngle: -85
-  maxVerticalAngle: 85
-  rb: {fileID: 0}
 --- !u!54 &1313874286571347081
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -77307,6 +77280,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5255690350267512432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9193019868449888891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c6e37d89a074f46a919188b58e35ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BrickInteractable
+  isHeld: 0
+  isThrown: 0
+  interactionText: 
+  holdDistance: 1
+  moveSpeed: 12
+  maxDistanceBeforeDrop: 5
+  holdDrag: 10
+  minHoldDistance: 1
+  maxHoldDistance: 4
+  scrollDistanceStep: 10
+  invertScroll: 0
+  horizontalRotateSpeed: 60
+  verticalRotateSpeed: 60
+  clampVertical: 1
+  minVerticalAngle: -85
+  maxVerticalAngle: 85
+  rb: {fileID: 0}
+  placedEffect: {fileID: 7354333060022914017}
 --- !u!1 &9207316291354095045
 GameObject:
   m_ObjectHideFlags: 0

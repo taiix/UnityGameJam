@@ -2,22 +2,33 @@ using UnityEngine;
 
 public class CandleInteractable : PickupInteractable
 {
-
     public bool IsSnappedInSlot { get; private set; }
+
+    public bool IsLit { get; private set; }
+
+    [Header("Candle VFX")]
+    [SerializeField] private ParticleSystem candleEffect;
+
     private Transform snappedParent;
 
     private bool isPlaced = false;
     private Collider col;
 
-
     public override void Awake()
     {
         base.Awake();
         col = GetComponent<Collider>();
+
+        if (candleEffect != null)
+        {
+            candleEffect.gameObject.SetActive(false);
+            candleEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
     }
+
     public override void OnFocus()
     {
-        if (!isHeld && !isPlaced)
+        if (!isHeld && !IsSnappedInSlot)
         {
             interactionText = "Hold LMB to pick up";
         }
@@ -29,7 +40,7 @@ public class CandleInteractable : PickupInteractable
 
     public override void OnInteract()
     {
-        if (isPlaced)
+        if (IsSnappedInSlot)
         {
             return;
         }
@@ -38,8 +49,7 @@ public class CandleInteractable : PickupInteractable
 
     public override void OnLoseFocus()
     {
-            interactionText = string.Empty;
-
+        interactionText = string.Empty;
     }
 
     public void SnapTo(Transform newParent, Transform snapPoint)
@@ -59,17 +69,36 @@ public class CandleInteractable : PickupInteractable
         isPlaced = true;
         interactionText = string.Empty;
 
-        if (col != null)
+        gameObject.layer = 1;
+
+
+        var body = GetComponent<Rigidbody>();
+        if (body != null)
         {
-            col.enabled = false;
+            body.linearVelocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
+            body.isKinematic = true;
+            body.useGravity = false;
+        }
+    }
+
+    public void Light()
+    {
+        if (IsLit) return;
+
+        IsLit = true;
+
+        if (candleEffect != null)
+        {
+            candleEffect.gameObject.SetActive(true);
+            candleEffect.Play();
         }
 
-        if (GetComponent<Rigidbody>() != null)
+        var slot = GetComponentInParent<CandlePuzzleSlot>();
+
+        if (slot != null)
         {
-            GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<Rigidbody>().useGravity = false;
+            slot?.NotifyOccupantLit();
         }
     }
 }
