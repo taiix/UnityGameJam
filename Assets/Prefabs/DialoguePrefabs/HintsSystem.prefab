@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7320051972240258385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2300710427504472832}
+  - component: {fileID: 7480757014038196424}
+  - component: {fileID: 7584513031227088049}
+  m_Layer: 0
+  m_Name: HintsSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2300710427504472832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7320051972240258385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7480757014038196424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7320051972240258385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2268d2a7b6c966d4186bf697466617fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  dialogues:
+  - dialogueCompleted: 0
+    waitTimeInSeconds: 5
+    dialogue:
+    - byyvyvyvhhdf kokokokodsnasd
+  - dialogueCompleted: 0
+    waitTimeInSeconds: 10
+    dialogue:
+    - ykykykykyky
+    - nng
+  currentDialogueIndex: 0
+--- !u!114 &7584513031227088049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7320051972240258385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9dba56edd065a46acf2d435cc46e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  dialogueState: 0
+  dialogCanvas: {fileID: 0}
+  otherCanvases:
+  - {fileID: 0}
+  - {fileID: 0}
+  dialogueTextBox: {fileID: 0}
