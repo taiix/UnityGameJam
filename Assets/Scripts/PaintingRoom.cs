@@ -8,6 +8,10 @@ public class PaintingRoom : MonoBehaviour
 
     public GameObject falseWall;
     public GameObject particles;
+    public GameObject ripples;
+
+    [Range(0,15)]
+    public int paintEffectStrength;
 
     public bool[] switches = new bool[7];
     private bool[] correctCombination = new bool[7]
@@ -24,7 +28,7 @@ public class PaintingRoom : MonoBehaviour
     private void Start()
     {
         kuwaharaMat = GetComponent<Renderer>().material;
-        kuwaharaMat.SetInt("_Radius", 6);
+        kuwaharaMat.SetInt("_Radius", paintEffectStrength);
     }
     public bool CheckSolution()
     {
@@ -46,6 +50,7 @@ public class PaintingRoom : MonoBehaviour
         kuwaharaMat.SetInt("_Radius", 0);
         falseWall.SetActive(false);
         particles.SetActive(true);
+        ripples.SetActive(true);
     }
     private void OnTriggerEnter(Collider other)
     {

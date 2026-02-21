@@ -62,7 +62,7 @@ Material:
     - _NoiseSpeed: 0.2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RippleContrast: 0.37
+    - _RippleContrast: 0.02
     - _RippleCount: 1
     - _Speed: 1
     m_Colors:
