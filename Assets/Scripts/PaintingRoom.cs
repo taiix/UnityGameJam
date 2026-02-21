@@ -6,6 +6,9 @@ public class PaintingRoom : MonoBehaviour
     public Material kuwaharaMat;
     public Transform teleportPoint;
 
+    public GameObject falseWall;
+    public GameObject particles;
+
     public bool[] switches = new bool[7];
     private bool[] correctCombination = new bool[7]
     {
@@ -41,6 +44,8 @@ public class PaintingRoom : MonoBehaviour
     void PuzzleSolved()
     {
         kuwaharaMat.SetInt("_Radius", 0);
+        falseWall.SetActive(false);
+        particles.SetActive(true);
     }
     private void OnTriggerEnter(Collider other)
     {
