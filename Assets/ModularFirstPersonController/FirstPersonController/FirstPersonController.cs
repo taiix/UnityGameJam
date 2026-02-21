@@ -150,12 +150,12 @@ public class FirstPersonController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        if(crosshair)
+        if(crosshair && crosshairObject != null)
         {
             crosshairObject.sprite = crosshairImage;
             crosshairObject.color = crosshairColor;
         }
-        else
+        else if(crosshairObject != null)
         {
             crosshairObject.gameObject.SetActive(false);
         }
@@ -163,7 +163,7 @@ public class FirstPersonController : MonoBehaviour
         #region Sprint Bar
 
         sprintBarCG = GetComponentInChildren<CanvasGroup>();
-
+        if (sprintBarCG == null) return;
         if(useSprintBar)
         {
             sprintBarBG.gameObject.SetActive(true);
