@@ -5256,7 +5256,7 @@ MonoBehaviour:
   isHeld: 0
   isThrown: 0
   interactionText: Hold LMB to pick up
-  holdDistance: 2
+  holdDistance: 0.7
   moveSpeed: 12
   maxDistanceBeforeDrop: 5
   holdDrag: 10

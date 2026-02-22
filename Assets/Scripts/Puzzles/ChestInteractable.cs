@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class ChestInteractable : Interactable
+public class ChestInteractable : PickupInteractable
 {
     [SerializeField] private Animator chestAnimator;
 
     bool isOpened = false;
+    
     public override void OnFocus()
     {
         if (!isOpened)
