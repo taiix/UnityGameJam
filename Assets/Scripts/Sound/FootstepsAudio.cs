@@ -41,6 +41,8 @@ public class FootstepsAudio : MonoBehaviour
 
     Dictionary<SurfaceType, AudioClip[]> _map;
 
+    CharacterMovement _movement;
+
     void Awake()
     {
         BuildMap();
@@ -51,6 +53,7 @@ public class FootstepsAudio : MonoBehaviour
             audioSource.playOnAwake = false;
         }
 
+        _movement = GetComponent<CharacterMovement>();
         audioSource.spatialBlend = spatialBlend;
     }
 
@@ -66,6 +69,13 @@ public class FootstepsAudio : MonoBehaviour
         {
             if (s == null || s.clips == null) continue;
             _map[s.surface] = s.clips;
+        }
+    }
+
+    private void Update()
+    {
+        if (_movement.isGrounded) {
+            OnFootstep();
         }
     }
 

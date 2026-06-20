@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
+    public bool isGrounded { get; private set; }
+
     [Header("Movement")]
     public float maxForce = 10f;
     public float sprintSpeed = 8f;
@@ -187,7 +189,9 @@ public class CharacterMovement : MonoBehaviour
     {
         float radius = GetComponent<CapsuleCollider>().radius * 0.5f;
         float distance = GetComponent<CapsuleCollider>().bounds.extents.y + groundCheckDistance;
-        return Physics.SphereCast(rb.position, radius, Vector3.down, out _, distance);
+        bool grounded = Physics.SphereCast(rb.position, radius, Vector3.down, out _, distance);
+        isGrounded = grounded;
+        return grounded;
     }
 
     private IEnumerator JumpCooldown()
