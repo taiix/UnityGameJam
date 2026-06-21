@@ -57,17 +57,19 @@ Material:
     - _EffectRadius: 0.84
     - _Frequency: 1
     - _Intensity: 0.379
-    - _NoiseContrast: 0.31
-    - _NoiseScaling: 3
+    - _NoiseContrast: 0.58
+    - _NoiseScale: 0
+    - _NoiseScaling: 199.1
     - _NoiseSpeed: 0.2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RippleContrast: 0.02
-    - _RippleCount: 1
+    - _RippleContrast: -0.01
+    - _RippleCount: 3.62
     - _Speed: 1
     m_Colors:
     - _Center: {r: 0, g: 0, b: 0, a: 0}
-    - _RippleCenter: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0.70980394}
+    - _RippleCenter: {r: 0, g: 6.91, b: 0, a: 0}
     - _Ripple_Center: {r: 0, g: 0, b: 0, a: 0}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

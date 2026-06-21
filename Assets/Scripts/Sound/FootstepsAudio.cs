@@ -74,12 +74,10 @@ public class FootstepsAudio : MonoBehaviour
 
     private void Update()
     {
-        if (_movement.isGrounded) {
-            OnFootstep();
-        }
+        Debug.Log(DetectSurfaceType(out bool i));
+        if (!audioSource.isPlaying && _movement.Rigidbody.linearVelocity.sqrMagnitude > 7f) OnFootstep();
     }
 
-    // Call this from an Animation Event on foot down
     public void OnFootstep()
     {
         var surface = DetectSurfaceType(out bool grounded);
