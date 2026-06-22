@@ -57,13 +57,13 @@ Material:
     - _EffectRadius: 0.84
     - _Frequency: 1
     - _Intensity: 0.379
-    - _NoiseContrast: 0.58
+    - _NoiseContrast: 1.5
     - _NoiseScale: 0
-    - _NoiseScaling: 199.1
+    - _NoiseScaling: 118.61
     - _NoiseSpeed: 0.2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RippleContrast: -0.01
+    - _RippleContrast: 0.01
     - _RippleCount: 3.62
     - _Speed: 1
     m_Colors:
