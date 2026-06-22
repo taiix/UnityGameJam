@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5455552622895482386
+--- !u!114 &-5765901457781401578
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,13 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 5c990b538724e414d9dc492df393f31e, type: 3}
+  m_Name: MoonSkybox
+  m_Shader: {fileID: -6465566751694194690, guid: bc25def0dfdf9414aaf6e42b0cd53db9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -37,12 +37,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Main_Normal:
-        m_Texture: {fileID: 2800000, guid: cf53b58093a06e440b137b771c26cf09, type: 3}
+    - _Moon_a594820ae85a4d2595da6c06e1cedcbd_Stars_4269968019_Cubemap:
+        m_Texture: {fileID: 8900000, guid: 5a672cb61ef32734b9c28539c9c42494, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Second_Normal:
-        m_Texture: {fileID: 2800000, guid: 5b2b5b8111b0b7145bc25530264f4464, type: 3}
+    - _SampleTexture2D_1fd6b7642a3149348346e7ed0012b22d_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: e9929ab0b3a480045bea255e3358e767, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Stars:
+        m_Texture: {fileID: 8900000, guid: 5a672cb61ef32734b9c28539c9c42494, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -59,18 +63,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Depth: -8.21
-    - _Displacement: 0.97
-    - _NormalStrength: 0.505
+    - _Phase: 0.088
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 4.53
-    - _SpeedWater1: 2
-    - _SpeedWater2: 1
-    - _Strengh: 2.61
-    - _Strenght: 0.09
+    - _Size: 0.14
+    - _TextureOffset: 2.35
     m_Colors:
-    - _Deep: {r: 0.03724635, g: 0.16550404, b: 0.2924528, a: 1}
-    - _Shallow: {r: 0.08566215, g: 0.59575176, b: 0.7264151, a: 0.4392157}
+    - _Tint: {r: 1.237144, g: 1.2086955, b: 1.0095563, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
