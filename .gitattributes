@@ -1,6 +1,38 @@
+# Audio / source / archives
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.wav filter=lfs diff=lfs merge=lfs -text
 *.mp3 filter=lfs diff=lfs merge=lfs -text
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.unitypackage filter=lfs diff=lfs merge=lfs -text
 *.cubemap filter=lfs diff=lfs merge=lfs -text
+
+# Textures (both lower- and upper-case extensions; git matches case-sensitively)
+*.tga filter=lfs diff=lfs merge=lfs -text
+*.TGA filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.PNG filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.tif filter=lfs diff=lfs merge=lfs -text
+*.tiff filter=lfs diff=lfs merge=lfs -text
+*.exr filter=lfs diff=lfs merge=lfs -text
+
+# Models
+*.fbx filter=lfs diff=lfs merge=lfs -text
+*.FBX filter=lfs diff=lfs merge=lfs -text
+*.obj filter=lfs diff=lfs merge=lfs -text
+
+# External Assets store texture/model types RAW (as origin/main does) so git
+# dedupes them against main and nothing re-uploads. Audio/cubemap/psd stay LFS.
+"Assets/External Assets/**/*.tga"  -filter -diff -merge -text
+"Assets/External Assets/**/*.TGA"  -filter -diff -merge -text
+"Assets/External Assets/**/*.png"  -filter -diff -merge -text
+"Assets/External Assets/**/*.PNG"  -filter -diff -merge -text
+"Assets/External Assets/**/*.jpg"  -filter -diff -merge -text
+"Assets/External Assets/**/*.jpeg" -filter -diff -merge -text
+"Assets/External Assets/**/*.tif"  -filter -diff -merge -text
+"Assets/External Assets/**/*.tiff" -filter -diff -merge -text
+"Assets/External Assets/**/*.exr"  -filter -diff -merge -text
+"Assets/External Assets/**/*.fbx"  -filter -diff -merge -text
+"Assets/External Assets/**/*.FBX"  -filter -diff -merge -text
+"Assets/External Assets/**/*.obj"  -filter -diff -merge -text

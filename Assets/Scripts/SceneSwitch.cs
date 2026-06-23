@@ -46,7 +46,10 @@ public class SceneSwitch : MonoBehaviour
         loadingPercentage.text = "100%";
 
         asyncOperation.allowSceneActivation = true;
+        while(!asyncOperation.isDone)
+            yield return null;
 
+        loadingScreen.SetActive(false);
     }
 
     public void QuitGame()
