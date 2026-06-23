@@ -1344,7 +1344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7650332839726455237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1445,6 +1445,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf7052d2b454b644940a96819a79fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneSwitch
+  loadingScreen: {fileID: 0}
+  loadingBar: {fileID: 0}
+  loadingPercentage: {fileID: 0}
+  fillDuration: 2
 --- !u!114 &4645816278985140425
 MonoBehaviour:
   m_ObjectHideFlags: 0

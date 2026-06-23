@@ -62,3 +62,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# LeartesStudios "Abandoned Horror Mansion" pack (~7.2 GB) is too large to
+# host on GitHub — re-import it from the Unity Asset Store after cloning.
+/[Aa]ssets/External Assets/LeartesStudios/
+/[Aa]ssets/External Assets/LeartesStudios.meta
+

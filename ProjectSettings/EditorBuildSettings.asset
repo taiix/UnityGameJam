@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/1920.unity
     guid: e910096d6da46ed46b69fd639f04e856
+  - enabled: 1
+    path: Assets/Scenes/Bootstrap.unity
+    guid: e8e1b92800dda734db5f170491f8e12a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 983ddf05d2909c848a0af1fc51724023, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
