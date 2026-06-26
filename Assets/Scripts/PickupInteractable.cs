@@ -27,6 +27,7 @@ public class PickupInteractable : Interactable
     [SerializeField] private float minVerticalAngle = -85f;
     [SerializeField] private float maxVerticalAngle = 85f;
 
+    private float currentVerticalAngle;
     private Collider objectCollider;
     public Rigidbody rb;
     private Camera cam;
@@ -82,6 +83,7 @@ public class PickupInteractable : Interactable
 
         isHeld = true;
         interactionText = string.Empty;
+        currentVerticalAngle = 0f;
 
         
         rb.isKinematic = false;
@@ -153,17 +155,20 @@ public class PickupInteractable : Interactable
         }
         if (keyboard.eKey.isPressed)
         {
-            transform.Rotate(Vector3.right * verticalRotateSpeed * dt, Space.Self);
+            float delta = verticalRotateSpeed * dt;
 
             if (clampVertical)
             {
-                Vector3 euler = transform.localEulerAngles;
-                float x = euler.x;
-                if (x > 180f) x -= 360f;
-                x = Mathf.Clamp(x, minVerticalAngle, maxVerticalAngle);
-                euler.x = x;
-                transform.localEulerAngles = euler;
+                float clamped = Mathf.Clamp(currentVerticalAngle + delta, minVerticalAngle, maxVerticalAngle);
+                delta = clamped - currentVerticalAngle;
+                currentVerticalAngle = clamped;
             }
+            else
+            {
+                currentVerticalAngle += delta;
+            }
+
+            transform.Rotate(Vector3.right * delta, Space.Self);
         }
     }
 
