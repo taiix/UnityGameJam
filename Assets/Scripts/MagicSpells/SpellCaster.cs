@@ -68,7 +68,7 @@ public class SpellCaster : MonoBehaviour
         {
             Debug.Log($"Checking spell: {spell.spellName} Page:{spell.page} Sequence:{string.Join(",", spell.sequence)}");
 
-            if (spell.page != adjustedPage) continue;
+            //if (spell.page != adjustedPage) continue;
 
             if (spell.sequence.Count != inputSequence.Count)
             {

@@ -92,6 +92,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &190307765154748835
 BoxCollider:
@@ -169,6 +170,7 @@ MonoBehaviour:
   clampVertical: 0
   minVerticalAngle: -85
   maxVerticalAngle: 85
+  rb: {fileID: 0}
   bookType: 1
 --- !u!1 &8903400694534804951
 GameObject:
@@ -197,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 8903400694534804951}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.70710677, z: -0.70710677, w: 0}
-  m_LocalPosition: {x: 0.0032, y: 0.2156, z: -0.033}
+  m_LocalPosition: {x: 0.001, y: 0.2156, z: -0.033}
   m_LocalScale: {x: 0.029127102, y: 0.045405, z: 0.03820655}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -236,7 +238,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 46cb4cf65a1f5384bad58708f4ac78bf, type: 2}
+  - {fileID: 2100000, guid: 687db7ca284680742b62c48b0bff7a62, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -258,4 +260,5 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
