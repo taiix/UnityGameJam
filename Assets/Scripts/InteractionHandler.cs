@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,13 +18,9 @@ public class InteractionHandler : MonoBehaviour
     private PlayerInput playerInput;
 
     [SerializeField] public GameObject interactionUI;
-    [SerializeField] private Transform holdParent;
 
     private InputAction grabAction;
     private PickupInteractable heldPickup;
-
-    // Track original parent so we can restore it on drop.
-    private readonly Dictionary<PickupInteractable, Transform> originalParents = new Dictionary<PickupInteractable, Transform>();
 
     private void Awake()
     {
@@ -36,9 +31,6 @@ public class InteractionHandler : MonoBehaviour
         inputAsset = playerInput.actions;
         player = inputAsset.FindActionMap("Player");
         mainCamera = Camera.main;
-
-        if (holdParent == null)
-            holdParent = transform;
     }
 
     private void OnEnable()
@@ -145,15 +137,6 @@ public class InteractionHandler : MonoBehaviour
         if (heldPickup != null) return false;
 
         heldPickup = pickup;
-
-        // Cache original parent (only once).
-        if (!originalParents.ContainsKey(pickup))
-            originalParents[pickup] = pickup.transform.parent;
-
-        // Parent to player hold point.
-        if (holdParent != null)
-            pickup.transform.SetParent(holdParent, worldPositionStays: true);
-
         heldPickup.BeginHold();
         return true;
     }
@@ -164,7 +147,6 @@ public class InteractionHandler : MonoBehaviour
 
         if (heldPickup is CandleInteractable candle && candle.IsSnappedInSlot)
         {
-            originalParents.Remove(heldPickup);
             heldPickup.EndHold();
             heldPickup = null;
 
@@ -179,16 +161,6 @@ public class InteractionHandler : MonoBehaviour
             }
 
             return;
-        }
-
-        if (originalParents.TryGetValue(heldPickup, out var originalParent))
-        {
-            heldPickup.transform.SetParent(originalParent, worldPositionStays: true);
-            originalParents.Remove(heldPickup);
-        }
-        else
-        {
-            heldPickup.transform.SetParent(null, worldPositionStays: true);
         }
 
         heldPickup.EndHold();

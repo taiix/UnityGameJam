@@ -54,13 +54,14 @@ public class BookshelfPuzzleManager : MonoBehaviour
                 solved = true;
                 OnPuzzleSolved?.Invoke();
                 bookshelf?.MoveBookShelf(false, 2f, 1f);
+                enableRoom.SetActive(true);
             }
         }
         else
         {
             if (solved)
             {
-                enableRoom.SetActive(true);
+                
                 solved = false;
                 bookshelf?.MoveBackToOriginal(0f);
             }
